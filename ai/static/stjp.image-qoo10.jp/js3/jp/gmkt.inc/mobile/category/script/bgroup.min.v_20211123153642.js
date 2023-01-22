@@ -1,0 +1,35 @@
+// (c)2021 eBay Japan
+
+var stateData={gdlc_cd:'0',alias:'H',rank_extend:true,review_recommends_state:{}}
+var extendsMoreRanking=[];$(document).ready(function(){setTimeout(function(){if(document.location.hash=="#best"){$("html, body").animate({scrollTop:$("div.beautyTopTrendBrand").offset().top-40},500);}},1000);pageSetWishMarking();pageEventBinding();pageLoadState();});function pageEventBinding(){setWishClickBind();$("#btn_trend_more").bind("click",function(e){$("div.beautyTopTrendBrand ul li").show();$(this).hide();});$("button[name=btn_recommend_catrgory]").bind("click",function(e){var obj=$(this);var parentObj=obj.closest('div.beauty_recommend_wrap');var key=obj.closest('div.beauty_recommend_wrap').attr("data-key");var cd=$(this).attr("data-cd");var idx=$("div.beauty_recommend_wrap").index(parentObj);getReviewRecommendGoodsList(key,cd,idx,1);});$("button[name=btn_recommend_more]").bind("click",function(e){var obj=$(this);var parentObj=obj.closest('div.beauty_recommend_wrap');var key=parentObj.attr("data-key");var cd=parentObj.find("div.centeredMenu > ul > li.selected > button").attr("data-cd");var idx=$("div.beauty_recommend_wrap").index(parentObj);getReviewRecommendGoodsList(key,cd,idx,getReviewNextPageNo(this));});}
+function getReviewRecommendGoodsList(keyword,gdmc_cd,index,pageNo){var url=Public.getCurrentHostUrl()+"/gmkt.inc/Mobile/Category/InnerAjax/ReviewKeywordCategoryAjaxAppend.aspx?g=2&k="+keyword+"&cd="+(gdmc_cd=='0'?'':gdmc_cd)+"&idx="+index+"&page_no="+pageNo;RMSHelper.asyncCallWebObject(url,"post",null,function(result,svc,xmlHttp){if(result!=null&&result!=undefined&&xmlHttp.status==200){var currentGoodsDivID="#div_recommend_main_goods_"+index.toString();var newHtml=$(result).find(currentGoodsDivID).html();if(newHtml!=undefined&&newHtml!=""){var currentGoodsDiv=$(currentGoodsDivID);currentGoodsDiv.html(newHtml);if($(currentGoodsDivID+"_review").length>0){try{new qoo10_func.dg_slide().reInit(currentGoodsDivID+"_review");}catch(e){new qoo10_func.dg_slide().init({wrap:currentGoodsDivID+"_review",visible:"auto"})}}
+var total_cnt=xmlHttp.getResponseHeader("total_cnt");var int_total_cnt=0;if(!isNaN(total_cnt))int_total_cnt=parseInt(total_cnt);if(int_total_cnt>0){var moreBtnObj=currentGoodsDiv.next();if(moreBtnObj.length>0){var pageNoObj=moreBtnObj.find(".review_button_page_no");moreBtnObj.attr("data-current",pageNo.toString());pageNoObj.html(pageNo.toString());pageNoObj[0].nextSibling.remove();moreBtnObj.find(".button_txt").append("/"+total_cnt.toString()+" ");moreBtnObj.attr("data-max",total_cnt);if(int_total_cnt>1)
+moreBtnObj.show();else
+moreBtnObj.hide();}}}
+var key=keyword;stateData.review_recommends_state[key]={keyword:keyword,gdmc_cd:gdmc_cd,index:index,pageNo:pageNo};pageSaveState();}});}
+function getReviewNextPageNo(obj){var moreBtnObj=$(obj);var current=parseInt(moreBtnObj.attr("data-current"));var max=parseInt(moreBtnObj.attr("data-max"));if(current==max)
+return 1;return current+1;}
+function getCategoryRanking(){var _gdlc_cd,_alias;_alias=$("#dv_rank_alias ul li.selected > button").attr("data-type");_gdlc_cd=$("#dv_rank_cate ul li.selected > button").attr("data-cd");if(_gdlc_cd!=stateData.gdlc_cd){if(_alias!="H"){_alias="H";$("#dv_rank_alias > ul > li.selected").removeClass("selected");$("#dv_rank_alias > ul > li:eq(0)").addClass("selected");}
+stateData.rank_extend=false;}
+else if(_alias!=stateData.alias){stateData.rank_extend=false;}
+if(typeof _gdlc_cd=="string"&&typeof _alias=="string"){var view_cnt=10;var url=Public.getCurrentHostUrl()+"/gmkt.inc/Mobile/Category/InnerAjax/CategoryRankingAjaxAppend.aspx?ctg=2&gdlc_cd="+(_gdlc_cd=='0'?'':_gdlc_cd)+"&alias="+_alias+"&v="+view_cnt;RMSHelper.asyncCallWebObject(url,"post",null,function(result,svc,xmlHttp){if(result!=null&&result!=undefined&&xmlHttp.status==200){if(result.trim()!=""){var cate_li=$(result).find("li");$("#ul_category_best").empty();$("#ul_category_best").append(cate_li);initWishButton("#ul_category_best");if(cate_li.length>0)
+$("#dv_cate_no_data").hide();else{$("#dv_cate_no_data").show();}}
+else{$("#ul_category_best").empty();}}
+stateData.gdlc_cd=_gdlc_cd;stateData.alias=_alias;ExtendCategoryRank(stateData.rank_extend);pageSaveState();});}}
+function initWishButton(parentSelector){pageSetWishMarking();setWishClickBind(parentSelector);}
+function pageSetWishMarking(){getWishGDNoListMarking({targets:[{gd_attrname:"data_gd_no",selected_classname:"selected"},{gd_attrname:"goodscode",selected_classname:"selected"}]});}
+function setWishClickBind(parentSelector){var target="button[name=btn_wish]";if(parentSelector!=undefined&&parentSelector!="")
+target=parentSelector+" "+target;$(target).bind("click",function(e){WishItems.proSetWishList=true;WishItems.isShowToast=false;WishItems.setWishList(this,"selected");if(e){e.preventDefault();e.stopPropagation();}});}
+function ExtendCategoryRank(isExtend){if(stateData.rank_extend!=isExtend){stateData.rank_extend=isExtend;pageSaveState();}
+var key=getMoreRankingKey();if(extendsMoreRanking.indexOf(key)==-1)
+extendsMoreRanking.push(key);}
+function getMoreRankingKey(){var _gdlc_cd,_alias;_alias=$("#dv_rank_alias ul li.selected > button").attr("data-type");_gdlc_cd=$("#dv_rank_cate ul li.selected > button").attr("data-cd");return _gdlc_cd+"_"+_alias;}
+function pageLoadState(){if(window.performance&&performance.navigation.type<=1){history.replaceState(null,null);}
+if(history.state!=undefined&&history.state!=null&&history.state!=''){stateData=JSON.parse(history.state);var isReloadCategoryRank=false;if(stateData.gdlc_cd!='0'){$("#li_rank_cate_0").removeClass("selected");$("#li_rank_cate_"+stateData.gdlc_cd).addClass("selected");isReloadCategoryRank=true;}
+if(stateData.alias!=''){$("#dv_rank_alias > ul > li.selected").removeClass("selected");$("#li_rank_alias_"+stateData.alias).addClass("selected");isReloadCategoryRank=true;}
+if(stateData.rank_extend!='0'){if(isReloadCategoryRank==false)
+ExtendCategoryRank(true);}
+if(isReloadCategoryRank)
+getCategoryRanking();var keys=Object.keys(stateData.review_recommends_state);var cateObj,centeredObj;for(var _i=0;_i<keys.length;_i++){var key=keys[_i];var json=stateData.review_recommends_state[key];cateObj=$("div.beauty_recommend_wrap[data-key="+json.keyword+"] button[name=btn_recommend_catrgory][data-cd="+json.gdmc_cd+"]");cateObj.closest("ul").find("li").removeClass("selected");cateObj.parent().addClass("selected");centeredObj=$("div.beauty_recommend_wrap[data-key="+json.keyword+"] div.centeredMenu");var leftPosition=cateObj.offset().left-(centeredObj.innerWidth()/2)+(cateObj.innerWidth()/2);centeredObj.scrollLeft(leftPosition);getReviewRecommendGoodsList(json.keyword,json.gdmc_cd,json.index,json.pageNo);}}
+else{$("#dv_rank_alias > ul > li:eq(0)").addClass("selected");}}
+function pageSaveState(){var json=JSON.stringify(stateData);if(json!=history.state){history.replaceState(json,null,null);}}

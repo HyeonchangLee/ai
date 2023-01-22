@@ -1,0 +1,838 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGBUS (0xa) at pc=0x0000000280393d24, pid=57664, tid=259
+#
+# JRE version:  (15.0.8+4) (build )
+# Java VM: OpenJDK 64-Bit Server VM (15.0.8+4-MTS, mixed mode, tiered, compressed oops, g1 gc, bsd-aarch64)
+# Problematic frame:
+# V  [libjvm.dylib+0x393d24]  _ZN8CodeHeap8allocateEm+0x1c8
+#
+# No core dump will be written. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dfile.encoding=UTF8 -ea -Xmx1024m 
+
+Host: MacBookAir10,1 arm64 1 MHz, 8 cores, 8G, Darwin 21.5.0
+Time: Thu Oct 13 11:57:59 2022 UTC elapsed time: 0.033065 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000000016d66e800):  JavaThread "Unknown thread" [_thread_in_vm, id=259, stack(0x000000016cf20000,0x000000016ef20000)]
+
+Stack: [0x000000016cf20000,0x000000016ef20000],  sp=0x000000016ef164e0,  free space=32729k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.dylib+0x393d24]  _ZN8CodeHeap8allocateEm+0x1c8
+V  [libjvm.dylib+0x213604]  _ZN9CodeCache8allocateEiii+0xb0
+V  [libjvm.dylib+0x20cc04]  _ZN10BufferBlob6createEPKci+0x10c
+V  [libjvm.dylib+0x878400]  _ZN12StubRoutines11initialize1Ev+0x80
+V  [libjvm.dylib+0x3bf49c]  _Z12init_globalsv+0x48
+V  [libjvm.dylib+0x8d014c]  _ZN7Threads9create_vmEP14JavaVMInitArgsPb+0x30c
+V  [libjvm.dylib+0x453c80]  JNI_CreateJavaVM+0x78
+C  [_jpype.cpython-38-darwin.so+0x11c9c]  _ZN9JPContext8startJVMERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEERKNS0_6vectorIS6_NS4_IS6_EEEEbbb+0xd0
+C  [_jpype.cpython-38-darwin.so+0x40058]  _ZL18PyJPModule_startupP7_objectS0_+0x304
+C  [python3.8+0x2aae0]  cfunction_call_varargs+0x168
+C  [python3.8+0x2a1f4]  _PyObject_MakeTpCall+0x268
+C  [python3.8+0x1401b0]  call_function+0x2a8
+C  [python3.8+0x13c6c0]  _PyEval_EvalFrameDefault+0x77e4
+C  [python3.8+0x134894]  _PyEval_EvalCodeWithName+0xcb0
+C  [python3.8+0x2afec]  _PyFunction_Vectorcall+0xec
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c7bc]  _PyEval_EvalFrameDefault+0x78e0
+C  [python3.8+0x134894]  _PyEval_EvalCodeWithName+0xcb0
+C  [python3.8+0x2afec]  _PyFunction_Vectorcall+0xec
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c6c0]  _PyEval_EvalFrameDefault+0x77e4
+C  [python3.8+0x134894]  _PyEval_EvalCodeWithName+0xcb0
+C  [python3.8+0x2afec]  _PyFunction_Vectorcall+0xec
+C  [python3.8+0x29ed8]  _PyObject_FastCallDict+0x11c
+C  [python3.8+0x2bdb0]  _PyObject_Call_Prepend+0x9c
+C  [python3.8+0xa2a08]  slot_tp_init+0x120
+C  [python3.8+0xb0880]  type_call+0x134
+C  [python3.8+0x2a1f4]  _PyObject_MakeTpCall+0x268
+C  [python3.8+0x1401b0]  call_function+0x2a8
+C  [python3.8+0x13c740]  _PyEval_EvalFrameDefault+0x7864
+C  [python3.8+0x134894]  _PyEval_EvalCodeWithName+0xcb0
+C  [python3.8+0x12f9f4]  builtin_exec+0x448
+C  [python3.8+0x7d78c]  cfunction_vectorcall_FASTCALL+0x11c
+C  [python3.8+0x2a690]  PyVectorcall_Call+0x78
+C  [python3.8+0x13cb54]  _PyEval_EvalFrameDefault+0x7c78
+C  [python3.8+0x134894]  _PyEval_EvalCodeWithName+0xcb0
+C  [python3.8+0x2afec]  _PyFunction_Vectorcall+0xec
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c6c0]  _PyEval_EvalFrameDefault+0x77e4
+C  [python3.8+0x2ae6c]  function_code_fastcall+0x80
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c6a4]  _PyEval_EvalFrameDefault+0x77c8
+C  [python3.8+0x2ae6c]  function_code_fastcall+0x80
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c740]  _PyEval_EvalFrameDefault+0x7864
+C  [python3.8+0x2ae6c]  function_code_fastcall+0x80
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c740]  _PyEval_EvalFrameDefault+0x7864
+C  [python3.8+0x2ae6c]  function_code_fastcall+0x80
+C  [python3.8+0x2cbb8]  object_vacall+0x154
+C  [python3.8+0x2cd7c]  _PyObject_CallMethodIdObjArgs+0x74
+C  [python3.8+0x16cd2c]  PyImport_ImportModuleLevelObject+0x704
+C  [python3.8+0x12dc0c]  builtin___import__+0x7c
+C  [python3.8+0x2aa98]  cfunction_call_varargs+0x120
+C  [python3.8+0x13cb68]  _PyEval_EvalFrameDefault+0x7c8c
+C  [python3.8+0x134894]  _PyEval_EvalCodeWithName+0xcb0
+C  [python3.8+0x2afec]  _PyFunction_Vectorcall+0xec
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c740]  _PyEval_EvalFrameDefault+0x7864
+C  [python3.8+0x134894]  _PyEval_EvalCodeWithName+0xcb0
+C  [python3.8+0x2afec]  _PyFunction_Vectorcall+0xec
+C  [python3.8+0x2cbb8]  object_vacall+0x154
+C  [python3.8+0x2cd7c]  _PyObject_CallMethodIdObjArgs+0x74
+C  [python3.8+0x16d3c4]  PyImport_ImportModuleLevelObject+0xd9c
+C  [python3.8+0x13a960]  _PyEval_EvalFrameDefault+0x5a84
+C  [python3.8+0x134894]  _PyEval_EvalCodeWithName+0xcb0
+C  [python3.8+0x12f9f4]  builtin_exec+0x448
+C  [python3.8+0x7d78c]  cfunction_vectorcall_FASTCALL+0x11c
+C  [python3.8+0x2a690]  PyVectorcall_Call+0x78
+C  [python3.8+0x13cb54]  _PyEval_EvalFrameDefault+0x7c78
+C  [python3.8+0x134894]  _PyEval_EvalCodeWithName+0xcb0
+C  [python3.8+0x2afec]  _PyFunction_Vectorcall+0xec
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c6c0]  _PyEval_EvalFrameDefault+0x77e4
+C  [python3.8+0x2ae6c]  function_code_fastcall+0x80
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c6a4]  _PyEval_EvalFrameDefault+0x77c8
+C  [python3.8+0x2ae6c]  function_code_fastcall+0x80
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c740]  _PyEval_EvalFrameDefault+0x7864
+C  [python3.8+0x2ae6c]  function_code_fastcall+0x80
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c740]  _PyEval_EvalFrameDefault+0x7864
+C  [python3.8+0x2ae6c]  function_code_fastcall+0x80
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c740]  _PyEval_EvalFrameDefault+0x7864
+C  [python3.8+0x134894]  _PyEval_EvalCodeWithName+0xcb0
+C  [python3.8+0x2afec]  _PyFunction_Vectorcall+0xec
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c6c0]  _PyEval_EvalFrameDefault+0x77e4
+C  [python3.8+0x134894]  _PyEval_EvalCodeWithName+0xcb0
+C  [python3.8+0x2afec]  _PyFunction_Vectorcall+0xec
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c740]  _PyEval_EvalFrameDefault+0x7864
+C  [python3.8+0x134894]  _PyEval_EvalCodeWithName+0xcb0
+C  [python3.8+0x2afec]  _PyFunction_Vectorcall+0xec
+C  [python3.8+0x140118]  call_function+0x210
+C  [python3.8+0x13c740]  _PyEval_EvalFrameDefault+0x7864
+C  [python3.8+0x134894]  _PyEval_EvalCodeWithName+0xcb0
+C  [python3.8+0x12f9f4]  builtin_exec+0x448
+...<more frames>...
+
+
+siginfo: si_signo: 10 (SIGBUS), si_code: 1 (BUS_ADRALN), si_addr: 0x0000000288420000
+
+Registers:
+ x0=0x0000000168790000  x1=0x0000000280aff7d6  x2=0xfffffffffffffff6  x3=0x0000000168790056
+ x4=0x000000011836f760  x5=0x0000000000000020  x6=0x0000000000000000  x7=0x0000000000000f10
+ x8=0x0000000000000000  x9=0x0000000288420000 x10=0x0000000000000007 x11=0x0000000000000002
+x12=0x0000000000000006 x13=0x0000000000000000 x14=0x0000000007e27d04 x15=0x0000000000007d04
+x16=0x00000001ae12b0d0 x17=0x000000016cf60090 x18=0x0000000000000000 x19=0x000000017d4b8fa0
+x20=0x0000000000000096 x21=0x0000000288420000 x22=0x000000017d4b8fa0 x23=0x0000000280ad7000
+x24=0x0000000280aa34d0 x25=0x0000000280aff490 x26=0x0000000280a9feb8 x27=0x0000000280aa36b8
+x28=0x0000000280aa3688  fp=0x000000016ef16520  lr=0x0000000280393d10  sp=0x000000016ef164e0
+pc=0x0000000280393d24 cpsr=0x0000000080001000
+Top of Stack: (sp=0x000000016ef164e0)
+0x000000016ef164e0:   0000000000004aa8 0000000000000003
+0x000000016ef164f0:   000000016ef16520 000000028089122c
+0x000000016ef16500:   000000017d4b8fa0 0000000000000002
+0x000000016ef16510:   0000000000004aa8 0000000000000003
+0x000000016ef16520:   000000016ef16580 0000000280213604
+0x000000016ef16530:   0000000280b1c000 0000000280b1c000
+0x000000016ef16540:   00000001ae11b630 0000000280ad3a20
+0x000000016ef16550:   0000000280b07000 0000000000004aa8
+0x000000016ef16560:   000000016b56fac0 0000000000004a38
+0x000000016ef16570:   00000002809d5173 0000000000000000
+0x000000016ef16580:   000000016ef165c0 000000028020cc04
+0x000000016ef16590:   0000000280b07000 000000017e1a5438
+0x000000016ef165a0:   000000017e1a5060 00000000000003d8
+0x000000016ef165b0:   000000017e1a5050 000000016cf24320
+0x000000016ef165c0:   000000016ef167f0 0000000280878400
+0x000000016ef165d0:   0000000000594000 0000000000000000
+0x000000016ef165e0:   0000000000004000 ffffffff00000300
+0x000000016ef165f0:   0000000101300a01 0000000288420000
+0x000000016ef16600:   000000000f000000 0000000000000000
+0x000000016ef16610:   0000000000004000 ffffffffadf24500
+0x000000016ef16620:   f37bfa1e148b0001 0000000000000000
+0x000000016ef16630:   0000000080b1c000 000000016cf24320
+0x000000016ef16640:   00000001ae11b630 0000000280ad3a98
+0x000000016ef16650:   000000017e1a5438 000000017e1a5060
+0x000000016ef16660:   0000000000000001 000000017e1a5060
+0x000000016ef16670:   0000000280ad1f70 00000002809820fa
+0x000000016ef16680:   0000000280b1c000 0000000280b1c000
+0x000000016ef16690:   00000001ae11b630 0000000280ad3a20
+0x000000016ef166a0:   0000000280ab6000 00000001012f8008
+0x000000016ef166b0:   0000000000000000 0000000000000000
+0x000000016ef166c0:   0000000000000020 00000001012f4000
+0x000000016ef166d0:   0000000280ab6000 0000000000000001 
+
+Instructions: (pc=0x0000000280393d24)
+0x0000000280393c24:   cb0a0129 b941026a 9aca2129 eb09011f
+0x0000000280393c34:   9a898108 f9009a68 b9414668 11000508
+0x0000000280393c44:   b9014668 91004280 1400005c eb09011f
+0x0000000280393c54:   540005e9 f940466a 8b090140 f103fa9f
+0x0000000280393c64:   540000a8 90003b61 911d8021 aa1403e2
+0x0000000280393c74:   14000026 8b080148 3800141f eb08001f
+0x0000000280393c84:   54000462 8b0a0129 9103fd29 90003b6a
+0x0000000280393c94:   911d854a d103f920 eb08013f 54000308
+0x0000000280393ca4:   ad400540 ad410d42 ad010c02 ad000400
+0x0000000280393cb4:   ad420540 ad430d42 ad030c02 ad020400
+0x0000000280393cc4:   ad440540 ad450d42 ad050c02 ad040400
+0x0000000280393cd4:   ad460540 3dc03942 3ccee143 3c8ee003
+0x0000000280393ce4:   ad068801 3d803000 9103f92b eb08013f
+0x0000000280393cf4:   aa0b03e9 54fffd03 14000005 cb000102
+0x0000000280393d04:   90003b61 911d8421 941710ce f9408668
+0x0000000280393d14:   f9400e69 b941026a 9aca2108 8b080135
+0x0000000280393d24:   f90002b4 52800028 390022a8 f9408668
+0x0000000280393d34:   8b140109 f9008669 f9400668 eb15011f
+0x0000000280393d44:   54000069 f940126a 14000004 f940126a
+0x0000000280393d54:   eb15015f 540001a8 a900abe8 f90003f5
+0x0000000280393d64:   d0003020 91189000 d0003022 91191842
+0x0000000280393d74:   d0003023 911a8863 52802741 97fb16b3
+0x0000000280393d84:   940df613 f9408669 f9409a68 f940926a
+0x0000000280393d94:   cb0a0129 b941026a 9aca2129 eb09011f
+0x0000000280393da4:   9a898108 f9009a68 b9414668 11000508
+0x0000000280393db4:   b9014668 910042a0 a9447bfd a9434ff4
+0x0000000280393dc4:   a94257f6 910143ff d65f03c0 a9bc5ff8
+0x0000000280393dd4:   a90157f6 a9024ff4 a9037bfd 9100c3fd
+0x0000000280393de4:   f9408808 90003889 d503201f f9426d2c
+0x0000000280393df4:   eb01019f 9a818195 b40004c8 aa0003f3
+0x0000000280393e04:   d280000d d280000b d2800016 9104400a
+0x0000000280393e14:   f9408409 aa0803ef aa0f03ee f94001ef 
+
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x0000000280b1e470, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x000000016d66e800 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=259, stack(0x000000016cf20000,0x000000016ef20000)]
+
+Threads with active compile tasks:
+
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x000000016b56fac0] CodeCache_lock - owner thread: 0x000000016d66e800
+
+Heap address: 0x0000000000000000, size: 0 MB, Compressed Oops mode: 32-bit
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+Deoptimization events (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (3 events):
+Event: 0.015 Protecting memory [0x000000016cf20000,0x000000016cf2c000] with protection modes 0
+Event: 0.015 Protecting memory [0x000000016cf24000,0x000000016cf2c000] with protection modes 3
+Event: 0.032 Loaded shared library /Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home/lib/libjava.dylib
+
+
+Dynamic libraries:
+0x00000001b8c71000 	/usr/lib/libSystem.B.dylib
+0x00000001b8c6b000 	/usr/lib/system/libcache.dylib
+0x00000001b8c29000 	/usr/lib/system/libcommonCrypto.dylib
+0x00000001b8c52000 	/usr/lib/system/libcompiler_rt.dylib
+0x00000001b8c49000 	/usr/lib/system/libcopyfile.dylib
+0x00000001ade97000 	/usr/lib/system/libcorecrypto.dylib
+0x00000001adf4c000 	/usr/lib/system/libdispatch.dylib
+0x00000001ae11a000 	/usr/lib/system/libdyld.dylib
+0x00000001b8c61000 	/usr/lib/system/libkeymgr.dylib
+0x00000001b8c04000 	/usr/lib/system/libmacho.dylib
+0x00000001b82f4000 	/usr/lib/system/libquarantine.dylib
+0x00000001b8c5e000 	/usr/lib/system/libremovefile.dylib
+0x00000001b3290000 	/usr/lib/system/libsystem_asl.dylib
+0x00000001ade39000 	/usr/lib/system/libsystem_blocks.dylib
+0x00000001adfd4000 	/usr/lib/system/libsystem_c.dylib
+0x00000001b8c56000 	/usr/lib/system/libsystem_collections.dylib
+0x00000001b7789000 	/usr/lib/system/libsystem_configuration.dylib
+0x00000001b69e5000 	/usr/lib/system/libsystem_containermanager.dylib
+0x00000001b8961000 	/usr/lib/system/libsystem_coreservices.dylib
+0x00000001b084a000 	/usr/lib/system/libsystem_darwin.dylib
+0x00000001b8c62000 	/usr/lib/system/libsystem_dnssd.dylib
+0x00000001adfd1000 	/usr/lib/system/libsystem_featureflags.dylib
+0x00000001ae12f000 	/usr/lib/system/libsystem_info.dylib
+0x00000001b8bcc000 	/usr/lib/system/libsystem_m.dylib
+0x00000001adf21000 	/usr/lib/system/libsystem_malloc.dylib
+0x00000001b321e000 	/usr/lib/system/libsystem_networkextension.dylib
+0x00000001b0ca3000 	/usr/lib/system/libsystem_notify.dylib
+0x00000001befc4000 	/usr/lib/system/libsystem_product_info_filter.dylib
+0x00000001b778e000 	/usr/lib/system/libsystem_sandbox.dylib
+0x00000001b8c5b000 	/usr/lib/system/libsystem_secinit.dylib
+0x00000001ae0d5000 	/usr/lib/system/libsystem_kernel.dylib
+0x00000001ae127000 	/usr/lib/system/libsystem_platform.dylib
+0x00000001ae10d000 	/usr/lib/system/libsystem_pthread.dylib
+0x00000001b49f0000 	/usr/lib/system/libsystem_symptoms.dylib
+0x00000001ade7d000 	/usr/lib/system/libsystem_trace.dylib
+0x00000001b8c36000 	/usr/lib/system/libunwind.dylib
+0x00000001ade3b000 	/usr/lib/system/libxpc.dylib
+0x00000001ae0bd000 	/usr/lib/libc++abi.dylib
+0x00000001adf93000 	/usr/lib/libobjc.A.dylib
+0x00000001b8c41000 	/usr/lib/liboah.dylib
+0x00000001ae056000 	/usr/lib/libc++.1.dylib
+0x00000001016fc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_heapq.cpython-38-darwin.so
+0x0000000101768000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/math.cpython-38-darwin.so
+0x00000001017a8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_datetime.cpython-38-darwin.so
+0x000000010174c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_posixsubprocess.cpython-38-darwin.so
+0x000000010180c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/select.cpython-38-darwin.so
+0x00000001018a0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/zlib.cpython-38-darwin.so
+0x00000001018b4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libz.1.2.12.dylib
+0x0000000101784000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_bz2.cpython-38-darwin.so
+0x00000001018f4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libbz2.1.0.8.dylib
+0x00000001018d4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_lzma.cpython-38-darwin.so
+0x0000000101984000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/liblzma.5.dylib
+0x0000000101794000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/grp.cpython-38-darwin.so
+0x0000000101954000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_opcode.cpython-38-darwin.so
+0x0000000101ab4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_socket.cpython-38-darwin.so
+0x0000000101b48000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_ssl.cpython-38-darwin.so
+0x0000000101bfc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libssl.1.1.dylib
+0x0000000101ea4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libcrypto.1.1.dylib
+0x0000000101b14000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_struct.cpython-38-darwin.so
+0x0000000101b2c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/binascii.cpython-38-darwin.so
+0x0000000101964000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_contextvars.cpython-38-darwin.so
+0x0000000101c98000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_asyncio.cpython-38-darwin.so
+0x0000000101974000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_queue.cpython-38-darwin.so
+0x0000000101c7c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_bisect.cpython-38-darwin.so
+0x0000000101d88000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_sha512.cpython-38-darwin.so
+0x0000000101d74000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_random.cpython-38-darwin.so
+0x0000000101e70000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_hashlib.cpython-38-darwin.so
+0x0000000101e84000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_blake2.cpython-38-darwin.so
+0x00000001020ec000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_sha3.cpython-38-darwin.so
+0x0000000102170000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_pickle.cpython-38-darwin.so
+0x0000000101e5c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/fcntl.cpython-38-darwin.so
+0x0000000102230000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_decimal.cpython-38-darwin.so
+0x00000001020d0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/termios.cpython-38-darwin.so
+0x000000010215c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_json.cpython-38-darwin.so
+0x0000000102520000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/unicodedata.cpython-38-darwin.so
+0x0000000102148000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_uuid.cpython-38-darwin.so
+0x0000000102218000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_statistics.cpython-38-darwin.so
+0x0000000102c98000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_sqlite3.cpython-38-darwin.so
+0x0000000102e20000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libsqlite3.0.dylib
+0x0000000102508000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_scproxy.cpython-38-darwin.so
+0x00000001aed52000 	/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration
+0x00000001b7795000 	/System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/AppleSystemInfo
+0x00000001ae15c000 	/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+0x00000001b0bcc000 	/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+0x00000001b0215000 	/System/Library/Frameworks/Security.framework/Versions/A/Security
+0x00000001b831f000 	/usr/lib/libbsm.0.dylib
+0x00000001b22d6000 	/usr/lib/libnetwork.dylib
+0x00000001b3239000 	/usr/lib/libMobileGestalt.dylib
+0x00000001b8c73000 	/usr/lib/libfakelink.dylib
+0x00000001b0594000 	/usr/lib/libicucore.A.dylib
+0x00000001b8c77000 	/System/Library/PrivateFrameworks/SoftLinking.framework/Versions/A/SoftLinking
+0x00000001b4bd3000 	/usr/lib/libDiagnosticMessagesClient.dylib
+0x00000001b3237000 	/usr/lib/libenergytrace.dylib
+0x00000001b8bba000 	/usr/lib/libz.1.dylib
+0x00000001b8c0d000 	/usr/lib/system/libkxld.dylib
+0x00000001af05f000 	/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
+0x00000001b7f39000 	/System/Library/PrivateFrameworks/IOMobileFramebuffer.framework/Versions/A/IOMobileFramebuffer
+0x00000001b567e000 	/System/Library/PrivateFrameworks/CoreAutoLayout.framework/Versions/A/CoreAutoLayout
+0x00000001b8f10000 	/usr/lib/libcompression.dylib
+0x00000001b2d69000 	/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork
+0x00000001b4cc7000 	/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration
+0x00000001b8db9000 	/usr/lib/libarchive.2.dylib
+0x00000001b56c9000 	/usr/lib/libxml2.2.dylib
+0x00000001bf0ed000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices
+0x00000001b7799000 	/usr/lib/liblangid.dylib
+0x00000001b94fd000 	/usr/lib/liblzma.5.dylib
+0x00000001b8ede000 	/usr/lib/libapple_nghttp2.dylib
+0x00000001b4607000 	/usr/lib/libsqlite3.dylib
+0x000000022d4b8000 	/usr/lib/libCoreEntitlements.dylib
+0x00000001b8943000 	/System/Library/PrivateFrameworks/AppleFSCompression.framework/Versions/A/AppleFSCompression
+0x00000001b8307000 	/usr/lib/libcoretls.dylib
+0x00000001b9516000 	/usr/lib/libcoretls_cfhelpers.dylib
+0x00000001b8f0b000 	/usr/lib/libpam.2.dylib
+0x00000001b957f000 	/usr/lib/libxar.1.dylib
+0x00000001b8954000 	/usr/lib/libbz2.1.0.dylib
+0x00000001b8c78000 	/usr/lib/libpcap.A.dylib
+0x00000001b49e7000 	/usr/lib/libdns_services.dylib
+0x00000001b8cb5000 	/usr/lib/libiconv.2.dylib
+0x00000001b8c03000 	/usr/lib/libcharset.1.dylib
+0x00000001b5647000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents
+0x00000001b0855000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore
+0x00000001b4c27000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata
+0x00000001b8967000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices
+0x00000001b8e3f000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit
+0x00000001b4976000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE
+0x00000001ae6a3000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices
+0x00000001b94a6000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices
+0x00000001b5654000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList
+0x00000001b82f7000 	/usr/lib/libCheckFix.dylib
+0x00000001b32a8000 	/System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC
+0x00000001b779b000 	/System/Library/PrivateFrameworks/CoreNLP.framework/Versions/A/CoreNLP
+0x00000001b4bd6000 	/System/Library/PrivateFrameworks/MetadataUtilities.framework/Versions/A/MetadataUtilities
+0x00000001aee0c000 	/usr/lib/libmecabra.dylib
+0x00000001bf38a000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate
+0x00000001b8330000 	/usr/lib/libmecab.dylib
+0x00000001aedd8000 	/usr/lib/libCRFSuite.dylib
+0x00000001b838d000 	/usr/lib/libgermantok.dylib
+0x00000001b8eb7000 	/usr/lib/libThaiTokenizer.dylib
+0x00000001b4ccf000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage
+0x00000001bf0c4000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/vecLib
+0x00000001b95c4000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib
+0x00000001b7e40000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib
+0x00000001aea2d000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib
+0x00000001b8fe1000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib
+0x00000001b8390000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLinearAlgebra.dylib
+0x00000001b8ef6000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparseBLAS.dylib
+0x00000001b8fdc000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libQuadrature.dylib
+0x00000001b7894000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBNNS.dylib
+0x00000001aeceb000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparse.dylib
+0x00000001b4ba2000 	/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics
+0x00000001b788c000 	/System/Library/PrivateFrameworks/LinguisticData.framework/Versions/A/LinguisticData
+0x00000001aeca3000 	/System/Library/PrivateFrameworks/Lexicon.framework/Versions/A/Lexicon
+0x00000001b95bc000 	/usr/lib/libChineseTokenizer.dylib
+0x00000001af451000 	/System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling
+0x00000001b8eb9000 	/System/Library/PrivateFrameworks/AppleSauce.framework/Versions/A/AppleSauce
+0x00000001b7f26000 	/System/Library/PrivateFrameworks/CoreEmoji.framework/Versions/A/CoreEmoji
+0x00000001b8da7000 	/usr/lib/libcmph.dylib
+0x00000001b5627000 	/System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory
+0x00000001b5617000 	/System/Library/Frameworks/OpenDirectory.framework/Versions/A/OpenDirectory
+0x00000001b9518000 	/System/Library/PrivateFrameworks/APFS.framework/Versions/A/APFS
+0x00000001b8247000 	/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation
+0x00000001b958e000 	/usr/lib/libutil.dylib
+0x00000001b0b8e000 	/System/Library/PrivateFrameworks/CoreServicesStore.framework/Versions/A/CoreServicesStore
+0x00000001b567b000 	/usr/lib/libapp_launch_measurement.dylib
+0x00000001b9592000 	/usr/lib/libxslt.1.dylib
+0x00000001b82db000 	/System/Library/PrivateFrameworks/BackgroundTaskManagement.framework/Versions/A/BackgroundTaskManagement
+0x00000001b6a04000 	/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface
+0x0000000104000000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/numpy/core/_multiarray_umath.cpython-38-darwin.so
+0x0000000104d58000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libopenblas.0.dylib
+0x0000000104338000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libgfortran.5.dylib
+0x0000000103300000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libomp.dylib
+0x0000000103164000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libquadmath.0.dylib
+0x0000000102c78000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libgcc_s.1.1.dylib
+0x00000001034c8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/numpy/core/_multiarray_tests.cpython-38-darwin.so
+0x000000010366c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_ctypes.cpython-38-darwin.so
+0x0000000103640000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libffi.8.dylib
+0x00000001036d8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/numpy/linalg/_umath_linalg.cpython-38-darwin.so
+0x0000000104880000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/numpy/fft/_pocketfft_internal.cpython-38-darwin.so
+0x0000000104aac000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/numpy/random/mtrand.cpython-38-darwin.so
+0x0000000104a30000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/numpy/random/bit_generator.cpython-38-darwin.so
+0x0000000104b98000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/numpy/random/_common.cpython-38-darwin.so
+0x000000010d000000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/numpy/random/_bounded_integers.cpython-38-darwin.so
+0x00000001048dc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/numpy/random/_mt19937.cpython-38-darwin.so
+0x0000000104a00000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/numpy/random/_philox.cpython-38-darwin.so
+0x0000000104b58000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/numpy/random/_pcg64.cpython-38-darwin.so
+0x000000010314c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/numpy/random/_sfc64.cpython-38-darwin.so
+0x000000010d128000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/numpy/random/_generator.cpython-38-darwin.so
+0x000000010d310000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/interval.cpython-38-darwin.so
+0x000000010d900000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/hashtable.cpython-38-darwin.so
+0x000000010d1f4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/missing.cpython-38-darwin.so
+0x000000010d0dc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/dtypes.cpython-38-darwin.so
+0x0000000104bd8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/np_datetime.cpython-38-darwin.so
+0x000000010d268000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/conversion.cpython-38-darwin.so
+0x0000000102e0c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/base.cpython-38-darwin.so
+0x000000010d42c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/nattype.cpython-38-darwin.so
+0x000000010d470000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/tzconversion.cpython-38-darwin.so
+0x000000010d2a4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/timezones.cpython-38-darwin.so
+0x000000010d598000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/parsing.cpython-38-darwin.so
+0x000000010db34000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/offsets.cpython-38-darwin.so
+0x000000010dc20000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/timedeltas.cpython-38-darwin.so
+0x000000010da4c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/fields.cpython-38-darwin.so
+0x0000000104d40000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/ccalendar.cpython-38-darwin.so
+0x000000010dca0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/timestamps.cpython-38-darwin.so
+0x000000010b7cc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/properties.cpython-38-darwin.so
+0x000000010dd9c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/period.cpython-38-darwin.so
+0x000000010dad4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/vectorized.cpython-38-darwin.so
+0x000000010b7e8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/ops_dispatch.cpython-38-darwin.so
+0x000000010f000000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/algos.cpython-38-darwin.so
+0x000000010de9c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/lib.cpython-38-darwin.so
+0x000000010de4c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslib.cpython-38-darwin.so
+0x000000010d2e0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/hashing.cpython-38-darwin.so
+0x000000010f1a4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/ops.cpython-38-darwin.so
+0x00000001034ec000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_csv.cpython-38-darwin.so
+0x000000010d108000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/arrays.cpython-38-darwin.so
+0x000000010f428000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/index.cpython-38-darwin.so
+0x000000010f690000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/join.cpython-38-darwin.so
+0x000000010f564000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/sparse.cpython-38-darwin.so
+0x0000000104a1c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/reduction.cpython-38-darwin.so
+0x0000000104b78000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/indexing.cpython-38-darwin.so
+0x000000010f9bc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/internals.cpython-38-darwin.so
+0x000000010f658000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/writers.cpython-38-darwin.so
+0x0000000102df8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/mmap.cpython-38-darwin.so
+0x000000010fb60000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/window/aggregations.cpython-38-darwin.so
+0x000000010fcb4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libc++.1.0.dylib
+0x000000010db08000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/window/indexers.cpython-38-darwin.so
+0x000000010fc34000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/reshape.cpython-38-darwin.so
+0x000000010fdbc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/tslibs/strptime.cpython-38-darwin.so
+0x000000011c000000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/groupby.cpython-38-darwin.so
+0x000000010d574000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/testing.cpython-38-darwin.so
+0x000000010d240000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/cmath.cpython-38-darwin.so
+0x000000011c180000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/parsers.cpython-38-darwin.so
+0x000000010f534000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/pandas/_libs/json.cpython-38-darwin.so
+0x000000010d22c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/matplotlib/_c_internal_utils.cpython-38-darwin.so
+0x000000011c4e0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/PIL/_imaging.cpython-38-darwin.so
+0x000000011c548000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libjpeg.9.dylib
+0x000000011c58c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libopenjp2.2.5.0.dylib
+0x000000011c670000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libtiff.5.dylib
+0x000000011c4a8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libxcb.1.dylib
+0x000000011c6f4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libwebp.7.dylib
+0x000000011c814000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libzstd.1.5.2.dylib
+0x000000011c8c4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libLerc.4.dylib
+0x000000011c478000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libdeflate.0.dylib
+0x000000010dd74000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libXau.6.dylib
+0x000000010dd88000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libXdmcp.6.dylib
+0x000000011c780000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/array.cpython-38-darwin.so
+0x000000011c998000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/matplotlib/_path.cpython-38-darwin.so
+0x000000011c9c4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/matplotlib/ft2font.cpython-38-darwin.so
+0x000000011ce30000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libfreetype.6.dylib
+0x000000011cdbc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libpng16.16.dylib
+0x000000011cd80000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/kiwisolver/_cext.cpython-38-darwin.so
+0x000000011d120000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/pyexpat.cpython-38-darwin.so
+0x000000011ebfc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/platform/_pywrap_cpu_feature_guard.so
+0x000000029dca0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/_pywrap_tensorflow_internal.so
+0x0000000161e78000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/libtensorflow_framework.2.dylib
+0x000000010f554000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/google/protobuf/internal/_api_implementation.cpython-38-darwin.so
+0x000000011f798000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/google/protobuf/pyext/_message.cpython-38-darwin.so
+0x000000011fab4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libprotobuf.30.dylib
+0x0000000160480000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/_pywrap_tfe.so
+0x0000000160000000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/platform/_pywrap_tf2.so
+0x0000000160d64000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/client/_pywrap_tf_session.so
+0x000000011fe68000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/util/_tf_stack.so
+0x000000011c764000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/wrapt/_wrappers.cpython-38-darwin.so
+0x000000016019c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/util/_pywrap_utils.so
+0x000000011cdf8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/util/_pywrap_nest.so
+0x0000000160260000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/_pywrap_py_exception_registry.so
+0x000000011fdcc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/framework/_dtypes.so
+0x000000011ebc0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/lib/core/_pywrap_bfloat16.so
+0x0000000160a7c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/profiler/internal/_pywrap_traceme.so
+0x0000000160bf4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/framework/_pywrap_python_api_dispatcher.so
+0x000000011d1e0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/framework/fast_tensor_util.so
+0x00000001611c8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/framework/_op_def_registry.so
+0x0000000161334000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/flags_pybind.so
+0x0000000161660000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/framework/_op_def_library_pybind.so
+0x0000000161a3c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/framework/_proto_comparators.so
+0x0000000163e8c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/data/experimental/service/_pywrap_server_lib.so
+0x0000000164518000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/data/experimental/service/_pywrap_utils.so
+0x00000001641a0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/lib/io/_pywrap_file_io.so
+0x000000011fa80000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/util/_pywrap_determinism.so
+0x000000011ffd8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/util/_pywrap_tensor_float_32_execution.so
+0x0000000164bac000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/lib/io/_pywrap_record_io.so
+0x0000000164ed8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/saved_model/pywrap_saved_model.so
+0x0000000165080000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/util/_pywrap_checkpoint_reader.so
+0x00000001653bc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/_pywrap_parallel_device.so
+0x0000000160a44000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/lib/core/_pywrap_py_func.so
+0x00000001656e4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/client/_pywrap_events_writer.so
+0x0000000165d10000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/profiler/internal/_pywrap_profiler.so
+0x000000010fb4c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_multiprocessing.cpython-38-darwin.so
+0x0000000167430000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/client/_pywrap_device_lib.so
+0x0000000167a78000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/compiler/tf2tensorrt/_pywrap_py_utils.so
+0x0000000167c58000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/grappler/_pywrap_tf_optimizer.so
+0x0000000167dcc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/grappler/_pywrap_tf_cluster.so
+0x0000000168010000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/brotli/_brotli.abi3.so
+0x000000016162c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/_cffi_backend.cpython-38-darwin.so
+0x000000016820c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/unicodedata2.cpython-38-darwin.so
+0x000000011c7dc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/lib-dynload/_multibytecodec.cpython-38-darwin.so
+0x0000000161a18000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/_errors.cpython-38-darwin.so
+0x00000001688a4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libhdf5.200.dylib
+0x0000000168500000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libcurl.4.dylib
+0x0000000165cdc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libnghttp2.14.dylib
+0x0000000168350000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libssh2.1.0.1.dylib
+0x0000000168394000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libgssapi_krb5.2.2.dylib
+0x0000000168660000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libkrb5.3.3.dylib
+0x0000000164eb4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libk5crypto.3.1.dylib
+0x000000011c490000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libcom_err.3.0.dylib
+0x000000011c7f4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libkrb5support.1.1.dylib
+0x00000001bbaa8000 	/usr/lib/libresolv.9.dylib
+0x00000001656ac000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5.cpython-38-darwin.so
+0x0000000168598000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/defs.cpython-38-darwin.so
+0x00000001665cc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/libhdf5_hl.200.dylib
+0x0000000167400000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/_objects.cpython-38-darwin.so
+0x00000001681c8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/_conv.cpython-38-darwin.so
+0x0000000167fd8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5r.cpython-38-darwin.so
+0x000000016879c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5t.cpython-38-darwin.so
+0x0000000168728000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5p.cpython-38-darwin.so
+0x00000001685f0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5s.cpython-38-darwin.so
+0x000000011f780000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/utils.cpython-38-darwin.so
+0x0000000164500000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5ac.cpython-38-darwin.so
+0x0000000165394000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5z.cpython-38-darwin.so
+0x000000016883c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5a.cpython-38-darwin.so
+0x0000000167a60000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/_proxy.cpython-38-darwin.so
+0x0000000168c4c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5d.cpython-38-darwin.so
+0x0000000168864000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5ds.cpython-38-darwin.so
+0x0000000168ca4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5f.cpython-38-darwin.so
+0x0000000168d00000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5g.cpython-38-darwin.so
+0x0000000167ff4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5i.cpython-38-darwin.so
+0x0000000168da4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5fd.cpython-38-darwin.so
+0x000000011c9e8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5pl.cpython-38-darwin.so
+0x0000000168c78000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5o.cpython-38-darwin.so
+0x0000000168cd0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/h5l.cpython-38-darwin.so
+0x0000000168e18000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/h5py/_selector.cpython-38-darwin.so
+0x0000000168814000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/_lib/_ccallback_c.cpython-38-darwin.so
+0x0000000169260000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/sparse/_sparsetools.cpython-38-darwin.so
+0x0000000169004000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/sparse/_csparsetools.cpython-38-darwin.so
+0x00000001690c4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/sparse/linalg/_isolve/_iterative.cpython-38-darwin.so
+0x0000000169190000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/linalg/_fblas.cpython-38-darwin.so
+0x0000000169714000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/linalg/_flapack.cpython-38-darwin.so
+0x00000001698b4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/linalg/_cythonized_array_utils.cpython-38-darwin.so
+0x0000000168884000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/linalg/_flinalg.cpython-38-darwin.so
+0x0000000168fcc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/linalg/_solve_toeplitz.cpython-38-darwin.so
+0x0000000168d70000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/linalg/_matfuncs_sqrtm_triu.cpython-38-darwin.so
+0x0000000169918000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/linalg/_matfuncs_expm.cpython-38-darwin.so
+0x0000000169a18000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/linalg/cython_lapack.cpython-38-darwin.so
+0x0000000169574000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/linalg/cython_blas.cpython-38-darwin.so
+0x00000001695b0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/linalg/_decomp_update.cpython-38-darwin.so
+0x00000001699bc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/sparse/linalg/_dsolve/_superlu.cpython-38-darwin.so
+0x0000000169b50000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/sparse/linalg/_eigen/arpack/_arpack.cpython-38-darwin.so
+0x0000000169bdc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/sparse/csgraph/_shortest_path.cpython-38-darwin.so
+0x0000000169af0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/sparse/csgraph/_tools.cpython-38-darwin.so
+0x0000000169b1c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/sparse/csgraph/_traversal.cpython-38-darwin.so
+0x0000000169c6c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/sparse/csgraph/_min_spanning_tree.cpython-38-darwin.so
+0x0000000169ce0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/sparse/csgraph/_flow.cpython-38-darwin.so
+0x0000000169d28000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/sparse/csgraph/_matching.cpython-38-darwin.so
+0x0000000169d6c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/sparse/csgraph/_reordering.cpython-38-darwin.so
+0x000000016a25c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/util/_pywrap_tfprof.so
+0x000000016a538000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/_pywrap_quantize_training.so
+0x0000000169c3c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/_pywrap_sanitizers.so
+0x000000016a810000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/framework/_test_metrics_util.so
+0x000000016a22c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/platform/_pywrap_stacktrace_handler.so
+0x000000016a4cc000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/util/_pywrap_util_port.so
+0x000000016aaf0000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/client/_pywrap_debug_events_writer.so
+0x000000016ae04000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/_pywrap_mlir.so
+0x000000016aa00000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/framework/_pywrap_python_op_gen.so
+0x000000016a7e4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/_pywrap_toco_api.so
+0x000000016b210000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/lite/python/metrics/_pywrap_tensorflow_lite_metrics_wrapper.so
+0x000000016b474000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/lite/experimental/microfrontend/python/ops/_audio_microfrontend_op.so
+0x000000016ba70000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/lite/python/interpreter_wrapper/_pywrap_tensorflow_interpreter_wrapper.so
+0x000000016b780000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/lite/python/analyzer_wrapper/_pywrap_analyzer_wrapper.so
+0x000000016b670000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/_pywrap_dtensor_device.so
+0x000000016c31c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow-plugins/libmetal_plugin.dylib
+0x00000001b6a22000 	/System/Library/Frameworks/Metal.framework/Versions/A/Metal
+0x00000001b6a18000 	/System/Library/PrivateFrameworks/IOAccelerator.framework/Versions/A/IOAccelerator
+0x000000020f7e2000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreFSCache.dylib
+0x0000000219fa8000 	/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libGPUCompilerUtils.dylib
+0x00000001b8f09000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/MetalPerformanceShaders
+0x00000001b7715000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSCore.framework/Versions/A/MPSCore
+0x00000001b88b6000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSImage.framework/Versions/A/MPSImage
+0x00000001b83a5000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNeuralNetwork.framework/Versions/A/MPSNeuralNetwork
+0x00000001b87de000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSMatrix.framework/Versions/A/MPSMatrix
+0x00000001b85b7000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSRayIntersector.framework/Versions/A/MPSRayIntersector
+0x00000001b880f000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNDArray.framework/Versions/A/MPSNDArray
+0x0000000211c0b000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSFunctions.framework/Versions/A/MPSFunctions
+0x00000001ae904000 	/System/Library/PrivateFrameworks/MetalTools.framework/Versions/A/MetalTools
+0x00000001b7793000 	/System/Library/PrivateFrameworks/AggregateDictionary.framework/Versions/A/AggregateDictionary
+0x0000000211c1f000 	/System/Library/Frameworks/MetalPerformanceShadersGraph.framework/Versions/A/MetalPerformanceShadersGraph
+0x00000001c4948000 	/System/Library/PrivateFrameworks/AppleNeuralEngine.framework/Versions/A/AppleNeuralEngine
+0x00000001f44ce000 	/System/Library/PrivateFrameworks/ANECompiler.framework/Versions/A/ANECompiler
+0x00000001d22d9000 	/usr/lib/libncurses.5.4.dylib
+0x000000021c9f2000 	/System/Library/PrivateFrameworks/MIL.framework/Versions/A/MIL
+0x00000001c3866000 	/System/Library/PrivateFrameworks/ANEServices.framework/Versions/A/ANEServices
+0x00000001b0cb3000 	/usr/lib/libsandbox.1.dylib
+0x00000001b57b7000 	/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo
+0x00000001b7166000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO
+0x00000001b369d000 	/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics
+0x00000001b3cab000 	/System/Library/Frameworks/ColorSync.framework/Versions/A/ColorSync
+0x000000020f7ef000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL
+0x00000001b32c4000 	/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight
+0x00000001b6ca1000 	/System/Library/PrivateFrameworks/FontServices.framework/libFontParser.dylib
+0x00000001b491b000 	/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices
+0x00000001c51c0000 	/System/Library/PrivateFrameworks/IOSurfaceAccelerator.framework/Versions/A/IOSurfaceAccelerator
+0x00000001ba2ae000 	/System/Library/PrivateFrameworks/WatchdogClient.framework/Versions/A/WatchdogClient
+0x00000001af551000 	/System/Library/Frameworks/CoreDisplay.framework/Versions/A/CoreDisplay
+0x00000001b6b8b000 	/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia
+0x00000001ba2b2000 	/System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport
+0x00000001b5053000 	/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore
+0x00000001ba2ed000 	/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox
+0x00000001b485f000 	/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard
+0x00000001b45ed000 	/System/Library/PrivateFrameworks/ProtocolBuffer.framework/Versions/A/ProtocolBuffer
+0x00000001b9638000 	/usr/lib/libate.dylib
+0x00000001ba82e000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libRadiance.dylib
+0x00000001ba837000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJPEG.dylib
+0x00000001ba78a000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libPng.dylib
+0x00000001ba7ac000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libTIFF.dylib
+0x00000001ba892000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libGIF.dylib
+0x00000001ba1c2000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJP2.dylib
+0x00000001b98e4000 	/usr/lib/libexpat.1.dylib
+0x00000001ba17d000 	/System/Library/PrivateFrameworks/AppleJPEG.framework/Versions/A/AppleJPEG
+0x00000001ba829000 	/System/Library/PrivateFrameworks/GPUWrangler.framework/Versions/A/GPUWrangler
+0x00000001ba809000 	/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment
+0x00000001ba831000 	/System/Library/PrivateFrameworks/DSExternalDisplay.framework/Versions/A/DSExternalDisplay
+0x00000001ba897000 	/System/Library/PrivateFrameworks/CMCaptureCore.framework/Versions/A/CMCaptureCore
+0x00000001b9ea8000 	/usr/lib/libspindump.dylib
+0x00000001afaf1000 	/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio
+0x00000001b9e95000 	/System/Library/PrivateFrameworks/AppServerSupport.framework/Versions/A/AppServerSupport
+0x00000001bc11b000 	/System/Library/PrivateFrameworks/perfdata.framework/Versions/A/perfdata
+0x00000001af671000 	/System/Library/PrivateFrameworks/AudioToolboxCore.framework/Versions/A/AudioToolboxCore
+0x00000001b6b64000 	/System/Library/PrivateFrameworks/caulk.framework/Versions/A/caulk
+0x00000001bba10000 	/usr/lib/libAudioStatistics.dylib
+0x00000001cda0f000 	/System/Library/PrivateFrameworks/SystemPolicy.framework/Versions/A/SystemPolicy
+0x00000001bbc7c000 	/usr/lib/libSMC.dylib
+0x00000001c49c8000 	/System/Library/Frameworks/CoreMIDI.framework/Versions/A/CoreMIDI
+0x00000001ba758000 	/usr/lib/libAudioToolboxUtility.dylib
+0x00000001c9b7f000 	/System/Library/PrivateFrameworks/OSAServicesClient.framework/Versions/A/OSAServicesClient
+0x00000001bc128000 	/usr/lib/libperfcheck.dylib
+0x00000001ce52b000 	/usr/lib/libmis.dylib
+0x00000001b96c9000 	/usr/lib/libIOReport.dylib
+0x00000001b73b5000 	/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage
+0x00000001c39e5000 	/System/Library/PrivateFrameworks/ASEProcessing.framework/Versions/A/ASEProcessing
+0x00000001af915000 	/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText
+0x00000001b9a3e000 	/System/Library/PrivateFrameworks/FaceCore.framework/Versions/A/FaceCore
+0x00000001b9a30000 	/System/Library/PrivateFrameworks/GraphVisualizer.framework/Versions/A/GraphVisualizer
+0x0000000219ebf000 	/System/Library/PrivateFrameworks/FontServices.framework/Versions/A/FontServices
+0x00000001b1e2d000 	/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers
+0x00000001b9e51000 	/System/Library/PrivateFrameworks/OTSVG.framework/Versions/A/OTSVG
+0x00000001b5381000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistry.dylib
+0x00000001b9e9e000 	/System/Library/PrivateFrameworks/FontServices.framework/libhvf.dylib
+0x0000000219ec0000 	/System/Library/PrivateFrameworks/FontServices.framework/libXTFontStaticRegistryData.dylib
+0x000000020fb91000 	/System/Library/Frameworks/OpenCL.framework/Versions/A/OpenCL
+0x000000020f803000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGFXShared.dylib
+0x000000020f844000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib
+0x000000020f9f0000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
+0x000000020f80c000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLImage.dylib
+0x000000020f800000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCVMSPluginSupport.dylib
+0x000000020f7e9000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreVMClient.dylib
+0x00000001b9898000 	/System/Library/PrivateFrameworks/AppleVA.framework/Versions/A/AppleVA
+0x00000001b980c000 	/usr/lib/libMatch.1.dylib
+0x00000001b0b51000 	/System/Library/PrivateFrameworks/CoreServicesInternal.framework/Versions/A/CoreServicesInternal
+0x000000020fc69000 	/System/Library/Extensions/AGXMetal13_3.bundle/Contents/MacOS/AGXMetal13_3
+0x00000001ce547000 	/System/Library/PrivateFrameworks/GPURawCounter.framework/Versions/A/GPURawCounter
+0x00000001c8ce8000 	/System/Library/PrivateFrameworks/IOGPU.framework/Versions/A/IOGPU
+0x000000016daf8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/tensorflow/python/util/fast_module_type.so
+0x000000016aac4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/ndimage/_nd_image.cpython-38-darwin.so
+0x000000017958c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/special/_ufuncs.cpython-38-darwin.so
+0x000000016dc70000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/special/_ufuncs_cxx.cpython-38-darwin.so
+0x000000016ddb8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/special/_specfun.cpython-38-darwin.so
+0x000000011ebe8000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/special/_comb.cpython-38-darwin.so
+0x000000016ade4000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/special/_ellip_harm_2.cpython-38-darwin.so
+0x000000016dd6c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/scipy/ndimage/_ni_label.cpython-38-darwin.so
+0x000000017979c000 	/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/_jpype.cpython-38-darwin.so
+0x000000017e51c000 	/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home/lib/libjli.dylib
+0x00000001c4aea000 	/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa
+0x00000001b0d04000 	/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit
+0x00000001b4217000 	/System/Library/Frameworks/CoreData.framework/Versions/A/CoreData
+0x00000001b1bbc000 	/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation
+0x00000001becbe000 	/System/Library/PrivateFrameworks/RemoteViewServices.framework/Versions/A/RemoteViewServices
+0x00000001b7131000 	/System/Library/PrivateFrameworks/XCTTargetBootstrap.framework/Versions/A/XCTTargetBootstrap
+0x00000001ba9b1000 	/System/Library/PrivateFrameworks/InternationalSupport.framework/Versions/A/InternationalSupport
+0x00000001baa3a000 	/System/Library/PrivateFrameworks/UserActivity.framework/Versions/A/UserActivity
+0x00000001b7136000 	/System/Library/PrivateFrameworks/CoreSVG.framework/Versions/A/CoreSVG
+0x00000001b991f000 	/System/Library/PrivateFrameworks/IconServices.framework/Versions/A/IconServices
+0x00000001c288b000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices
+0x00000001b7119000 	/System/Library/PrivateFrameworks/DFRFoundation.framework/Versions/A/DFRFoundation
+0x00000001bb85e000 	/System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox
+0x00000001ba9bd000 	/System/Library/PrivateFrameworks/DataDetectorsCore.framework/Versions/A/DataDetectorsCore
+0x00000001d13b7000 	/System/Library/PrivateFrameworks/TextInput.framework/Versions/A/TextInput
+0x00000001b6de5000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox
+0x00000001becfe000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition
+0x00000001b53d1000 	/System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI
+0x00000001b560b000 	/System/Library/PrivateFrameworks/PerformanceAnalysis.framework/Versions/A/PerformanceAnalysis
+0x00000001b820c000 	/System/Library/PrivateFrameworks/MobileKeyBag.framework/Versions/A/MobileKeyBag
+0x00000001ba90d000 	/System/Library/PrivateFrameworks/TextureIO.framework/Versions/A/TextureIO
+0x00000001bba38000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS
+0x00000001b3daa000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices
+0x00000001ba8a1000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore
+0x00000001bbdcf000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD
+0x00000001bbdc7000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/ColorSyncLegacy
+0x00000001bba24000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis
+0x00000001ba862000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATSUI.framework/Versions/A/ATSUI
+0x00000001bbd5c000 	/usr/lib/libcups.2.dylib
+0x00000001bc136000 	/System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos
+0x00000001bc147000 	/System/Library/Frameworks/GSS.framework/Versions/A/GSS
+0x00000001b9ead000 	/System/Library/PrivateFrameworks/Heimdal.framework/Versions/A/Heimdal
+0x00000001c2c1b000 	/System/Library/Frameworks/Kerberos.framework/Versions/A/Libraries/libHeimdalProxy.dylib
+0x00000001b49f9000 	/System/Library/Frameworks/Network.framework/Versions/A/Network
+0x00000001b98ff000 	/usr/lib/libheimdal-asn1.dylib
+0x00000001bc197000 	/System/Library/PrivateFrameworks/CommonAuth.framework/Versions/A/CommonAuth
+0x00000001bb99e000 	/System/Library/PrivateFrameworks/AudioSession.framework/Versions/A/AudioSession
+0x00000001b9991000 	/System/Library/PrivateFrameworks/MediaExperience.framework/Versions/A/MediaExperience
+0x00000001bb824000 	/System/Library/PrivateFrameworks/AudioSession.framework/libSessionUtility.dylib
+0x00000001bbddb000 	/System/Library/PrivateFrameworks/AudioResourceArbitration.framework/Versions/A/AudioResourceArbitration
+0x00000001bffa1000 	/System/Library/PrivateFrameworks/PowerLog.framework/Versions/A/PowerLog
+0x00000001b9909000 	/System/Library/PrivateFrameworks/IconFoundation.framework/Versions/A/IconFoundation
+0x00000001becea000 	/System/Library/PrivateFrameworks/SpeechRecognitionCore.framework/Versions/A/SpeechRecognitionCore
+0x0000000280000000 	/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home/lib/server/libjvm.dylib
+0x0000000179788000 	/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home/lib/libjimage.dylib
+0x000000017e56c000 	/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home/lib/libjava.dylib
+
+
+VM Arguments:
+jvm_args: -Dfile.encoding=UTF8 -ea -Xmx1024m 
+java_command: <unknown>
+java_class_path (initial): /Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/bin:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/scala-library-2.12.3.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/twitter-text-1.14.7.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/komoran-3.0.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/jhannanum-0.8.4.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/open-korean-text-2.1.0.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/aho-corasick.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/kkma-2.0.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/shineware-common-1.0.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/snakeyaml-1.12.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/shineware-ds-1.0.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/jhannanum-0.8.4.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/kkma-2.0.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/aho-corasick.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/shineware-common-1.0.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/shineware-ds-1.0.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/komoran-3.0.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/konlpy/java/snakeyaml-1.12.jar:/Users/hyeonchanglee/miniforge3/envs/t25d/lib/python3.8/site-packages/k
+Launcher Type: generic
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 2                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 8                                         {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 134217728                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 1073741824                                {product} {command line}
+   size_t MinHeapSize                              = 6815736                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5839564                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909338                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909338                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     bool UseCompressedClassPointers               = true                                 {lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                                 {lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseNUMA                                  = false                                     {product} {ergonomic}
+     bool UseNUMAInterleaving                      = false                                     {product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home
+PATH=/Users/hyeonchanglee/miniforge3/envs/t25d/bin:/Users/hyeonchanglee/miniforge3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/hyeonchanglee:/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home/bin:.:/Users/hyeonchanglee/sw/flutter/bin
+LD_LIBRARY_PATH=/usr/local/oracle/instantclient_19_8
+SHELL=/bin/zsh
+LANG=en_US.UTF-8
+TZ=UTC
+DYLD_LIBRARY_PATH=/usr/local/oracle/instantclient_19_8:
+
+Signal Handlers:
+SIGSEGV: [libjvm.dylib+0x929b40], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_ONSTACK|SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.dylib+0x929b40], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.dylib+0x929b40], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.dylib+0x714000], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.dylib+0x714000], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.dylib+0x929b40], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR2: [libjvm.dylib+0x714a34], sa_mask[0]=00000000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: SIG_DFL, sa_mask[0]=11111111011111110111111111111111, sa_flags=none
+SIGINT: [python3.8+0x207a94], sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGTERM: [python3.8+0x207a94], sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGQUIT: SIG_DFL, sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART
+
+
+---------------  S Y S T E M  ---------------
+
+OS:uname: Darwin 21.5.0 Darwin Kernel Version 21.5.0: Tue Apr 26 21:08:29 PDT 2022; root:xnu-8020.121.3~4/RELEASE_ARM64_T8101 arm64
+OS uptime: 3 days 14:28 hours
+rlimit (soft/hard): STACK 8176k/65520k , CORE 0k/infinity , NPROC 1333/2000 , NOFILE 10240/infinity , AS infinity/infinity , CPU infinity/infinity , DATA infinity/infinity , FSIZE infinity/infinity , MEMLOCK infinity/infinity , RSS infinity/infinity
+load average: 2.15 3.57 3.57
+
+CPU: total 8 (initial active 8) 0x61:0x0:0x1b588bb3:0, simd, crc, lse
+
+Memory: 16k page, physical 8388608k(160736k free), swap 3145728k(1067008k free)
+
+vm_info: OpenJDK 64-Bit Server VM (15.0.8+4-MTS) for bsd-aarch64 JRE (15.0.8+4-MTS) (Zulu15.42+15-CA), built on Jul 13 2022 04:53:46 by "zulu_re" with clang Apple LLVM 12.0.0 (clang-1200.0.32.28)
+
+END.

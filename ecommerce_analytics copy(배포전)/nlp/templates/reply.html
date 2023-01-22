@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content-block %}
+<!-- 스크립트 시작-->
+
+<script>		
+	$(function(){
+		//폼의 데이터를 가져옴
+		var input_text_area = document.getElementById('input_text_area').value;
+
+		$('#searchBtn').click(function(){
+			input_text_area = document.getElementById('input_text_area').value;
+			//console.log(movie_select)
+
+			$.ajax({
+				data:{'input_text_area':input_text_area},
+				url:  '/nlp/input_word/', //챗봇 api url
+				type: 'GET',
+				dataType: 'json',
+				success: function(data) {
+					console.log("data : "+data)
+					console.log("data : "+data.input_text_area)
+					console.log("data : "+data.score)
+					//console.log("data : "+(data.score).toFixed(2))
+
+					//$('#score').html(data.results); 
+					$('#score').html(100*(Number(data.score)).toFixed(4)); 
+
+
+				}, error:function(){
+				}//error
+			});//ajax
+
+		});//searchBtn
+
+
+
+	});	//function	
+</script>
+
+
+
+
+
+
+<!-- 스타일 몇개 해놓는거-->
+<style>
+	.title_css{
+		color:red;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis; 
+	}
+	.wrap_1{margin-bottom:-20px;}
+	#movie_select{  
+		margin: 0 15px;
+		padding: 0 15px;
+		--fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+		--fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";
+		--fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
+		color: #333;
+		line-height: 1.33;
+		font-size: 12px;
+		font-family: Helvetica,Arial,sans-serif;
+		-webkit-text-size-adjust: none;
+		cursor: pointer;
+		letter-spacing: 0;
+		position: relative;
+		overflow: hidden;
+		width: 90%;
+		display: block;
+		box-sizing: border-box;
+		border: 1.5px #ffdfdb solid;
+		height: 36px;
+		border-color: #ff422e;
+		border-radius: 6px;
+		background-color: #f8f8f8;
+	}
+	#ul_qna_list{
+		text-size-adjust: 100%;
+		-webkit-tap-highlight-color: transparent;
+		color: #000;
+		font-weight: 300;
+		font-family: "Hiragino Kaku Gothic ProN","Hiragino Sans",Roboto,"メイリオ",Meiryo,"ＭＳ Ｐゴシック",sans-serif;
+		font-size: 12px;
+		line-height: 18px;
+		text-align: left;
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		overflow: hidden;
+		margin-top: 15px;
+		border: 1px #e6e6e8 solid;
+		border-radius: 6px;
+		
+		text-size-adjust: 100%;
+		-webkit-tap-highlight-color: transparent;
+		color: #000;
+		font-weight: 300;
+		font-family: "Hiragino Kaku Gothic ProN","Hiragino Sans",Roboto,"メイリオ",Meiryo,"ＭＳ Ｐゴシック",sans-serif;
+		font-size: 12px;
+		box-sizing: border-box;
+		border-width: 0;
+		border-style: solid;
+		width: 100%;
+		position: relative;
+		display: block;
+		flex: 1 1 auto;
+		flex-direction: column;
+		align-content: flex-start;
+		overflow: hidden;
+		overflow-y: auto;
+		line-height: 18px;
+		padding: 20px 15px 30px;
+		text-align: left;
+		padding-top: 0px;
+		padding-bottom: 0px;
+		
+	}
+</style>
+
+
+<div class="container">
+			
+<div></div>
+
+	<section id="main" class="fashion">
+	    
+			<div id="section_fashion_trend" class="fashion_trend trend">	
+				<h3>
+					상품댓글 긍정/부정 분석		
+				</h3>
+				<div style="padding: 0px 0px 14px 14px;">
+					<p>
+
+						🎁상품댓글 긍정/부정 분석입니다. <br>
+						댓글을 입력하면 <span style="color: blue;">긍정적인 댓글</span>인지,
+						<span style="color: red;">부정적인 댓글</span>인지 분석해드립니다.<br>
+						이 프로그램을 이용해 자동으로 고객에게 댓글을 다는것이 가능해집니다. <br>
+						입력창에 고객댓글을 입력해주세요.🧐<br>
+					</p>				
+					
+
+				</div>
+
+				
+					<form name="search" method="post" id="search"> 
+					{% csrf_token %}
+					<!--상품 검색용 추천박스-->
+					<div class="search_keyword" >
+						<h3>분석하려는 텍스트를 입력하세요</h3>
+				
+						<ul class="qna_list" id="ul_qna_list" >
+							<li class="list_title">
+								{% comment %} <input style="border: rgb(235, 83, 60) solid 1.2px; width:100%"  type="text" value="여기에 값을 넣어준다!" id="input_text_area">  {% endcomment %}
+								<textarea  style="border: rgb(235, 83, 60) solid 1.2px; width:100%"  name="" id="input_text_area" cols="30" rows="10"></textarea>
+							</li>
+						</ul>
+
+						<!--상품 검색용 추천박스-->
+					   <div class='load_more_wrap' style="margin-top: 10px;">
+						   <button type="button" id="searchBtn" class="btn btn_rightArrow icon_right" onclick="location.href='#';">
+							   <strong>분석 🔍</strong>
+							</button>
+					   </div> 
+					</div>
+					
+
+
+					</form>
+
+
+			</div>
+
+		
+
+
+
+					
+<!--메인 랭킹--> 		
+<div class="mainRanking" style="margin-top: -20px;">
+		
+</div>
+<!--순위 시작-->
+<div class="list2021_wrap">
+				
+	<ul class="list2021 rank list" id="ul_category_best">
+	
+			<li data_gd_no="988121331" style=" ">
+				<div class="top_wrap">
+
+					<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+						<div class="img_wrap">
+							<img style="width: 80%;"
+								class="thumb" 
+								
+								load="N"
+								src="https://cdn-icons-png.flaticon.com/512/4711/4711987.png"
+								gd_src="#"
+									
+								alt="1위">
+							<!-- 품절 -->
+							
+							<!-- 메가와리 뱃지 -->
+							
+							
+							<!-- CPS -->
+							
+						</div>
+					</a>
+	
+					<div class="content_wrap">
+						<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+							<dl class="text_wrap">
+								<dt>
+									
+									<!-- 장르 -->
+										<p class="text_brand genres0">
+											결과
+										</p>
+										
+										
+									<!-- 영화제목 -->
+									<p style="font-size: 1.2em;" class="text_item title0">안녕하세요 챗봇입니다. 소중한 의견 감사합니다. 앞으로 더 열심히 하겠습니다.</p>
+								</dt>
+	
+								<dd>
+
+									<!-- 평점 --> 
+									<div class="text_price">
+										<p class="price_wrap">
+
+											
+												<span class="price_percent ratings0">
+													<span  style="color: black; font-size: 0.8em;">["<span id="score" style="color: red;">98</span>%로 긍정댓글입니다."]</span>
+												</span>
+											
+										</p>
+											
+										
+									</div>
+								</dd>
+							</dl>
+						</a>
+
+					</div>
+				</div>
+			</li>
+			
+	
+	
+	</ul>
+	
+	</div>
+<!--메인 랭킹 끝--> 
+	
+
+{% endblock content-block %}
+

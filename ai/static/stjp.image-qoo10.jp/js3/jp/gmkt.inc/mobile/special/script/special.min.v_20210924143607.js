@@ -1,0 +1,18 @@
+// (c)2021 eBay Japan
+
+var __currentCouponObj=null;$(document).ready(function(){if(Public.isLogin()){setCouponDownLoadInfo();}
+if($('[data-btn-type=push]').length>0){setCustomPush();$('[data-btn-type=push]').on('click',requestCustomPush);}
+UITrackingHelper.IncreaseCPSItemViewCountByDebounce("cps_specialgoods",function(obj){return $(obj).attr("id").replace("g_","");});});function getCoupon(encrypt_eid,obj){__currentCouponObj=obj;if(Public.isLogin()){MobileUtil.EventApply(encrypt_eid,{"callback":"couponCallBack"});}else{MobileUtil.goLoginPage();}}
+function couponCallBack(result,retCode){if(result=="WON"||result=="LOSE"){if(__currentCouponObj!=null){var obj=$(__currentCouponObj);var coup_class="coupon_complete";var coup_text="";switch(result){case"WON":coup_text=MultiLang.findResource("coup_aleary_down_client_text");break;case"LOSE":switch(retCode){case"-2":coup_text=MultiLang.findResource("coup_exceed_client_text");coup_class="coupon_close";break;case"-6":case"-24":return{popup_show:true};break;}
+break;}
+obj.attr("disabled","disabled");obj.closest("div.coupon").addClass(coup_class);if(coup_text!="")
+obj.find(".coupon_text").html(coup_text);}}
+return{popup_show:true};}
+function setCouponDownLoadInfo(){var encrypt_eids_list=[];$("li[coup-down-check=Y]").each(function(i){encrypt_eids_list.push($(this).attr("data-eid"));});if(encrypt_eids_list.length>0){var param=new RMSParam();param.add("eids",encrypt_eids_list.join(","));var checkDisable=true;if($("li[coup-down-check=N]").length>0)
+checkDisable=false;RMSHelper.asyncCallWebMethod(Public.getServiceUrl("swe_EventAjaxService.asmx"),"GetReceivedCoupon",param.toJson(),function(result){if(result.Rows!=null&&result.Rows.length>0){for(var i=0;i<result.Rows.length;i++){if(result.Rows[i].received){var btn=$("li[data-eid="+result.Rows[i].encode_eid+"]").find("button");if(checkDisable){btn.attr("disabled","disabled");btn.find(".coupon_text").html(MultiLang.findResource("coup_aleary_down_client_text"));}
+btn.closest("div.coupon").addClass("coupon_complete");}}}});}}
+var isCallRequestCustomPush=false;function setCustomPush(){$('[data-btn-type=push]').each(function(){var $this=$(this);var title=$this.attr('data-title');var send_dt=$this.attr('data-send-dt');var on=$this.attr('data-on');var off=$this.attr('data-off');if(!Public.isLogin()){$this.attr('src',on);return;}
+var param=new RMSParam();param.add("title",title);param.add("send_dt",send_dt);RMSHelper.asyncCallWebMethod(Public.getServiceUrl("swe_MemberAjaxService.asmx"),"CheckCustomPush",param.toJson(),function(result,svc,methodName,xmlHttpasync){if(result==0){$this.attr('src',off);}else if(result==-1){$this.attr('src',on);}});})}
+function requestCustomPush(){if(isCallRequestCustomPush)return false;var $this=$(this);var title=$this.attr('data-title');var send_dt=$this.attr('data-send-dt');var on=$this.attr('data-on');var off=$this.attr('data-off');isCallRequestCustomPush=true;if(Public.isLogin()==false){MobileUtil.goLoginPage();isCallRequestCustomPush=false;return false;}
+var param=new RMSParam();param.add("title",title);param.add("send_dt",send_dt);RMSHelper.asyncCallWebMethod(Public.getServiceUrl("swe_MemberAjaxService.asmx"),"RequestCustomPush",param.toJson(),function(result,svc,methodName,xmlHttpasync){if(result==0){$this.attr('src',off);}else if(result==1){$this.attr('src',on);}else if(result==-1){alert('fail');}else if(result==-2){MobileUtil.goLoginPage();}
+isCallRequestCustomPush=false;});}

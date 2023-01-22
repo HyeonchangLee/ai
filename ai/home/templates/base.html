@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<!-- Mirrored from m.qoo10.jp/gmkt.inc/Mobile/Category/FGroup.aspx by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 25 Jun 2022 18:46:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head id="ctl00_ctl00_Head2">
+	<title>데이터 분석</title>
+
+	<meta charset="utf-8" /><meta id="ctl00_ctl00_viewport_meta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<meta name="keywords" content="Qoo10,Shopping,通販,Openmarket,キューテン,ショッピング,ネットショッピング,ネット通販,激安,価格比較,最安,オークション,送料無料,割引クーポン, ファッション,コスメ,家電,ベビー," />
+	<meta name="description" content="Qoo10（キューテン）はeBay Japanのネット通販サイト。ファッションからコスメ、家電、食品、生活雑貨まで何でもクーポンで割引！ポイント還元いつも最安値でお届けします。" />
+	<meta name="referrer" content="no-referrer-when-downgrade" />
+
+	<link rel="shortcut icon" href="{% static 'stjp.image-qoo10.jp/css/jp/qoo10/front/cm/common/image/qoo10.v_20120529.ico'%}" />	
+	<link rel="shortcut icon" href="{% static 'stjp.image-qoo10.jp/css/jp/qoo10/front/m/move/images/ico/favicon.ico'%}" rel="apple-touch-icon" sizes="120x120">
+	<link href="{% static 'stjp.image-qoo10.jp/css/jp/qoo10/front/m/move/images/ico/favicon.png'%}" rel="apple-touch-icon"> 
+	
+	<link rel="stylesheet" type="text/css" href="{% static 'stjp.image-qoo10.jp/20220516104030/css/jp/qoo10/front/cm/mobile/css/common/bundle.min.css'%}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'stjp.image-qoo10.jp/20220621105250/css/jp/qoo10/front/m/2019/css/_common.bundle.css'%}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'stjp.image-qoo10.jp/20200421100352/css/jp/qoo10/front/cm/mobile/css/category/bundle.min.css'%}"/>
+	
+	<link rel="stylesheet" type="text/css" href="{% static 'stjp.image-qoo10.jp/20220621105251/css/jp/qoo10/front/m/2019/css/main.bundle.css'%}" media="all" charset="utf-8" />	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" /> <!--아이콘 쉽게 받기-->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	
+</head>
+
+<body>
+
+	<div class="page">
+		
+
+		<div class="header_wrapper">
+			<!-- 메인 헤더 -->
+			<div class="header_fixed">
+				
+				
+					<header class="header2020">
+						<div class="headerTop main">
+							<button type="button" class="top_menu layerpopup2022_btn" data-layerpopup="menu" onclick="ShowCategoryView();">
+								<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<g stroke="currentColor" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+										<path d="M2.982 5h17.894M2.982 19h17.894M2.982 12h17.894"/>
+									</g>
+								</svg>
+								Menu
+							</button>
+							
+							<h1>
+								<img style="width: 20%;" id='logo' src="{% static 'images/logo.jpeg' %}" onclick="javascript:location.href='/'" alt="">
+							</h1>
+							<a href="https://m.qoo10.jp/gmkt.inc/Mobile/Order/Cart.aspx" class="top_cart">
+								<svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+									<g transform="translate(1.462 3.22)" fill="none" fill-rule="evenodd">
+										<path d="m21.952 4.197-2.084 9.125-11.364.126-2.407-9.044 15.855-.207z" stroke="currentColor" stroke-width="1.5"/>
+										<path d="m2.02 0 .033.002h2.984c.385 0 .726.237.861.587l.035.108 3.23 12.833-2.275-2.897-2.33-9.134H2.073a.76.76 0 0 1-.054.001H.75a.75.75 0 0 1 0-1.5h1.27z" fill="currentColor" fill-rule="nonzero"/>
+										<ellipse stroke="currentColor" stroke-width="1.5" cx="9.646" cy="18.801" rx="1.788" ry="1.771"/>
+										<ellipse stroke="currentColor" stroke-width="1.5" cx="19.062" cy="18.801" rx="1.788" ry="1.771"/>
+									</g>
+								</svg>
+								Go to cart
+								<span id="a_cart_cnt" class="count" style="display:none;"></span>
+							</a>
+							<!--검색 부분-->
+							{% comment %} <form class="topSearch">
+								<label for="keyword">
+									<input type="text" name="keyword" class="default_searchbar" autocomplete="off" autocapitalize="off" spellcheck="false" title="search keyword" placeholder="何をお探しですか？" />
+									<div class="btn_wrap">
+										<button type="button" class="searchSubmitBtn selected">
+											<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<g transform="translate(1.904 2.04)" stroke="currentColor" stroke-width="2" fill="none" fill-rule="evenodd">
+													<circle cx="8" cy="8" r="7"/>
+													<path d="m19.192 19.192-6.364-6.364"/>
+												</g>
+											</svg>
+											Search
+										</button>
+										<button type="button" class="searchRemoveBtn">
+											Remove
+										</button>
+									</div>
+								</label>
+							</form> {% endcomment %}
+							
+
+						</div>
+
+
+						<nav class="headerTab">
+							<ul>
+								<li class="selected"><a href="/">메인</a></li>
+								<li class=""><a href="#">영화추천</a></li>
+								<li class=""><a href="#">댓글분석</a></li> 
+								<li class=""><a href="#">시계열분석</a></li> 
+								<li class=""><a href="#">장바구니분석</a></li> 
+							</ul>
+						</nav>
+					</header>
+				
+
+		</div>
+		<!-- //header_fixed -->
+	</div>
+	<!-- //header_wrapper -->
+
+	<!-- Search Header START -->
+		
+
+<section>
+{% block content-block %}
+{% endblock content-block %}
+</section>
+
+
+
+
+</body>
+
+</html>

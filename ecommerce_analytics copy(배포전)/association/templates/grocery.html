@@ -1,0 +1,354 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content-block %}
+<!-- 스크립트 시작-->
+<script>		
+	$(function(){
+
+	//폼의 데이터를 가져옴
+	var product_select = document.getElementById('product_select').value;
+
+	// ajax 통신 : view.py 
+	$.ajax({
+		data:{'product_select':product_select},
+		url:  '/association/best_combinations/', //챗봇 api url
+		type: 'GET',
+		dataType: 'json',
+		success: function(data) {
+			
+			// 옵션에 상품 리스트 출력
+			let str_title = ""
+			for(j=0;j<data.product_name_all.length;j++){
+
+				str_title += '<option value="'+data.product_name_all[j]+'" >'+data.product_name_all[j]+'</option>'
+			}
+			$('#product_select').html(str_title)
+
+
+		}, error:function(){
+		}
+	});//ajax
+	$('#searchBtn').click(function(){
+		
+
+		product_select = document.getElementById('product_select').value;
+		document.getElementById("box1").style.display = 'block';
+		
+		$.ajax({
+			data:{'product_select':product_select},
+				url:  '/association/best_combinations/', //챗봇 api url
+				type: 'GET',
+				dataType: 'json',
+				success: function(data) {
+					
+					//console.log(data.link_image)
+					//console.log(product_select)
+					//console.log(data.consequents_image)
+					//console.log(JSON.parse(data.link_image))
+					//console.log("data : "+data.sim_title)
+					//console.log("data : "+data.sim_genres)
+
+
+					var search_str =''
+					
+					search_str+= '<div class="list2021_wrap" style="margin-top: -20px; id="box1">'
+					search_str+= '<h3>검색하신 상품입니다 🥳</h3>'
+					search_str+= 	'<ul class="list2021 card" id="ul_one_day_chance">'
+					search_str+= 	'<li data_gd_no="985717111">'
+					search_str+= 		'<div class="top_wrap">'
+					search_str+= 		'<a href="#">'
+					search_str+= 			'<div class="img_wrap">'
+					search_str+= 				'<img class="thumb" src="'+data.link_image+'" alt="search">'
+					search_str+= 			'</div>'
+					search_str+= 		'</a>'
+					search_str+= '<div class="content_wrap">'
+					search_str+= 		'<a href="#">'
+					search_str+= 		'<dl class="text_wrap">'
+					search_str+= 			'<dt>'
+					search_str+= 			'<p class="text_item">상품명 : '+product_select +'</p>'
+					search_str+= 		'</dt>'
+					search_str+= 	'<dd>'
+					search_str+= 		'<p class="text_option">'
+					search_str+= 	'<span class="option_text">총 '+data.consequents_image.length+'개의 조합</span>'
+					search_str+= 	'</p>'
+					search_str+= 	'<div class="text_price">'
+					search_str+= 		'<p class="price_wrap">'
+					search_str+= 			'<strong class="price_original">'
+					search_str+= 				'5,680<span>원</span>' 
+					search_str+= 			'</strong>'
+					search_str+= 			'<span class="price_percent">'
+					search_str+= 					'4.8'
+					search_str+= 			'</span>'
+					search_str+= 		'</p></div></dd></dl></a></div></div></li></ul></div>'
+
+
+
+					$('#box1').html(search_str)
+
+					var lidata = '';
+					//console.log(data.consequents_image.length)
+					for(i=0;i<data.consequents_image.length;i++){
+						if(i==10)
+						break;
+
+						lidata +='<li data_gd_no="988121331" style=" ">'
+						lidata +='<div class="top_wrap">'
+						lidata +='<a href="#" >'
+						lidata +='<div class="img_wrap">'
+						lidata +='<img class="thumb" load="N"'
+						lidata +='src="'+ data.consequents_image[i] +'"'
+						lidata +='gd_src="#" alt="'+(i+1)+'위">'
+						lidata +='</div>'
+						lidata +='</a>'
+						lidata +='<div class="content_wrap">'
+						lidata +='<a href="#" >'
+						lidata +='<dl class="text_wrap">'
+						lidata +='<dt>'
+						lidata +='<p class="text_brand genres0">'
+						lidata +=(data.support[i]*100).toFixed(2) +'%의 비중을 가진 조합'
+						lidata +='</p>'
+						lidata +='<p style="font-size: 1.2em;" class="text_item title0">상품명 : '+data.consequents[i]+'</p><br>'
+						lidata +='<p style="font-size: 1em;" class="text_item confidence">이 상품을 같이 구매할 확률 : <span style="color:red">'+ ((data.confidence[i]*100).toFixed(2)) +'%</span></p>'
+						lidata +='<p style="font-size: 1em;" class="text_item lift">이 조합으로 구매시 <span style="color:red">'+ ((data.lift[i]).toFixed(2)) +' 배</span> 구매 상승 </p>'
+						lidata +='</dt><dd></dd></dl></a></div></div></li>'
+
+					}//for
+					
+					$('#ul_category_best').html(lidata)
+		
+				}, error:function(){
+				}//error
+		})//ajax
+
+	})//searchBtn
+
+	})	//function	
+</script>
+
+<!-- 스타일 몇개 해놓는거-->
+<style>
+	.title_css{
+		color:red;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis; 
+	}
+	.wrap_1{margin-bottom:-20px;}
+	#product_select{  
+		margin: 0 15px;
+		padding: 0 15px;
+		--fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+		--fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";
+		--fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
+		color: #333;
+		line-height: 1.33;
+		font-size: 12px;
+		font-family: Helvetica,Arial,sans-serif;
+		-webkit-text-size-adjust: none;
+		cursor: pointer;
+		letter-spacing: 0;
+		position: relative;
+		overflow: hidden;
+		width: 90%;
+		display: block;
+		box-sizing: border-box;
+		border: 1.5px #ffdfdb solid;
+		height: 36px;
+		border-color: #ff422e;
+		border-radius: 6px;
+		background-color: #f8f8f8;
+	}
+</style>
+
+
+<div class="container">
+			
+
+	<section id="main" class="fashion">
+	    
+			<div id="section_fashion_trend" class="fashion_trend trend">	
+				<h3>
+					🛒구매상품 장바구니 분석
+				</h3>
+				<div style="padding: 0px 0px 14px 14px;">
+					<p>
+			
+						구매상품 장바구니 분석입니다. <br>
+						현재까지의 고객 구매 정보를 바탕으로 <strong>최적의 구매조합</strong>을 알려드립니다. <br>
+						구매한 상품을 입력하시면 <span style="color: red;">어떤 조합으로 가장 많이사는지</span> 출력됩니다.
+						
+					</p>				
+					<!-- 검색 버튼 -->
+					<!-- <header class="header2020" style="padding-top: 20px; margin-left: -15px;">
+						<div class="headerTop main">
+							<form class="topSearch">
+								<label for="keyword">
+									<input type="text" name="keyword" class="default_searchbar" autocomplete="off" autocapitalize="off" spellcheck="false" title="search keyword" placeholder="何をお探しですか？" />
+									<div class="btn_wrap">
+										<button type="button" class="searchSubmitBtn selected">
+											<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<g transform="translate(1.904 2.04)" stroke="currentColor" stroke-width="2" fill="none" fill-rule="evenodd">
+													<circle cx="8" cy="8" r="7"/>
+													<path d="m19.192 19.192-6.364-6.364"/>
+												</g>
+											</svg>
+											Search
+										</button>
+										<button type="button" class="searchRemoveBtn">
+											Remove
+										</button>
+									</div>
+								</label>
+							</form>
+						</div>
+					</header> -->
+					<!-- 검색 버튼 -->
+
+				</div>
+					<form name="search" method="post" id="search"> 
+					{% csrf_token %}
+					<!--상품 검색용 추천박스-->
+						<div class="search_keyword">
+							<select name="product_select" id="product_select" >
+								<option value="v1">검색하려는 상품을 선택하세요</option>
+								
+							</select>
+							<div class='load_more_wrap' style="margin-top: 10px;">
+								<button type="button" id="searchBtn" class="btn btn_rightArrow icon_right" onclick="location.href='#';">
+									<strong>검색 🔍</strong>
+								 </button>
+							</div> 
+
+
+						</div>
+					</form>
+					<!--상품 검색용 추천박스-->
+
+					<!--새로고침 버튼-->
+					<!-- <button id="btn_fashion_trend_more" type="button" class="round_button">
+						<span class="button_txt">
+							<span class="point">
+								새로고침
+							</span>						
+							하시려면 여기를 클릭 
+						</span>
+					</button> -->
+					<!--새로고침 버튼-->
+
+			</div>
+						<!--상품 하나만-->
+			<div class="list2021_wrap" style="margin-top: -20px; display: none;" id="box1">
+				<h3>검색하신 상품이 출력됩니다.</h3>
+				<ul class="list2021 card" id="ul_one_day_chance">
+					<li data_gd_no="985717111">
+						<!-- 브랜드샵 > 셀러샵정보 -->
+						
+						<div class="top_wrap">
+							<!-- 랭킹 정보 -->
+							
+							<a href="#">
+								<div class="img_wrap">
+									<img class="thumb" src="{% static 'images/product.png' %}" alt="" onerror="this.src=''">
+									<!-- 품절 -->
+								</div>
+							</a>
+
+							<div class="content_wrap">
+								<a href="#">
+									<dl class="text_wrap">
+										<dt>
+									
+											<!-- 상품명 -->
+											<p class="text_item">
+												잠시만 기다려 주세요...
+											</p>
+										</dt>
+
+										<dd>
+											
+										</dd>
+									</dl>
+								</a>
+							
+							</div>
+						</div>
+						
+					</li>
+				</ul>
+			</div>
+			<!--상품 하나만-->
+
+
+			
+			
+			
+			
+			
+			
+			<div class="list2021_wrap" style="margin-top: 10px;">
+				<h3>👑 함께 구매하는 상품 베스트 10</h3>
+				<ul class="list2021 rank list" id="ul_category_best">
+				
+						<li data_gd_no="988121331" style=" ">
+							<div class="top_wrap">
+			
+								<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+									<div class="img_wrap">
+										<img id=''
+											class="thumb" 
+											
+											load="N"
+											src="{% static 'images/product.png' %}"
+											gd_src="#"
+												
+											alt="1위">
+										<!-- 품절 -->
+										
+										<!-- 메가와리 뱃지 -->
+										
+										
+										<!-- CPS -->
+										
+									</div>
+								</a>
+				
+								<div class="content_wrap">
+										
+									<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+										<dl class="text_wrap" >
+											<dt>
+												
+												<!-- 장르 -->
+													<p class="text_brand genres0">
+														전체 대비 이 조합의 거래 비중을 나타냅니다.
+													</p>
+													
+													
+												<!-- 영화제목 -->
+												<p style="font-size: 1.2em;" class="text_item title0">상품명 : 상품명이 출력됩니다.</p><br>
+												<p style="font-size: 0.8em;" class="text_item confidence">검색한 상품과 이 상품이 같이 구매될 확률이 출력됩니다.</p>
+												<p style="font-size: 0.8em;" class="text_item lift">이 조합으로 구매시, 기존 구매보다 몇 배 구매 상승하는 지 나타냅니다. </p>
+											</dt>
+				
+											<dd></dd>
+										</dl>
+									</a>
+			
+								</div>
+							</div>
+						</li>
+						
+						
+				
+				
+				</ul>
+</div>
+
+
+
+
+
+
+
+{% endblock content-block %}

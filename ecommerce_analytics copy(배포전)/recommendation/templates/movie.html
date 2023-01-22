@@ -1,0 +1,845 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content-block %}
+<!-- 스크립트 시작-->
+<script>		
+	$(function(){
+		//폼의 데이터를 가져옴
+		var movie_select = document.getElementById('movie_select').value;
+
+		// ajax 통신 : view.py 
+		$.ajax({
+			data:{'movie_select':movie_select},
+			url:  '/recommendation/rec_1_pop/', //챗봇 api url
+			type: 'GET',
+			dataType: 'json',
+			success: function(data) {
+				//console.log("data : "+data.genres[0])
+				//console.log("movie_select : "+movie_select)
+				//console.log("data.title : "+data.title)
+				//console.log("data.all : "+data.all)
+				
+				
+				for(i=0;i<10;i++){
+					$('.title'+i).html('제목 : '+data.title[i]+'<br><br>'); 
+					$('.ratings'+i).html('평점 : '+(data.score[i]).toFixed(2)); 
+					$('.genres'+i).html('장르 : '+data.genres[i]); 
+				}
+				
+				
+				//셀렉트 박스에 타이틀 출력
+				let str_title = ""
+				for(j=0;j<data.all.length;j++){
+
+					str_title += '<option value="'+data.all[j]+'" >'+data.all[j]+'</option>'
+				}
+				$('#movie_select').html(str_title)
+
+			
+	
+			}, error:function(){
+			}
+		});//ajax
+
+		$('#searchBtn').click(function(){
+			movie_select = document.getElementById('movie_select').value;
+			//console.log(movie_select)
+
+			$.ajax({
+				data:{'movie_select':movie_select},
+				url:  '/recommendation/rec_1_pop/', //챗봇 api url
+				type: 'GET',
+				dataType: 'json',
+				success: function(data) {
+					//console.log("data : "+data.sim_title)
+					//console.log("data : "+data.sim_genres)
+					var lidata = '';
+
+					for(i=0;i<10;i++){
+						lidata += '<li data_gd_no="988121331">'
+						lidata +=	'<div class="top_wrap">'
+						lidata +=		'<a href="#">'
+						lidata +=			'<div class="img_wrap">'
+						lidata +=				'<img class="thumb" load="N" src="'+data.poster_path[i]+'" alt="">'	
+						lidata +=			'</div>'
+						lidata +=		'</a>'
+						lidata +=	'<div class="content_wrap">'
+						lidata +=		'<a href="#" >'
+						lidata +=			'<dl class="text_wrap">'
+						lidata +=				'<dt>'
+						lidata +=					'<p class="text_brand"> 장르 : '+data.sim_genres[i]+'</p>'
+						lidata +=					'<p style="font-size: 1.2em;" class="text_item"> 제목 : '+data.sim_title[i]+'<br><br></p>'
+						lidata +=				'</dt>'
+						lidata +=					'<dd>'
+						lidata +=						'<div class="text_price">'
+						lidata +=							'<p class="price_wrap">'
+						lidata +=									'<span class="price_percent"> 평점 : '+(data.sim_score[i]).toFixed(2)+'</span>'			
+						lidata +=							'</p></div></dd></dl></a></div></div></li>'
+					}//for
+					
+					$('#ul_category_best').html(lidata)
+		
+				}, error:function(){
+				}//error
+			});//ajax
+
+		});//searchBtn
+
+
+
+	});	//function	
+</script>
+
+
+<!-- 스타일 몇개 해놓는거-->
+<style>
+	.title_css{
+		color:red;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis; 
+	}
+	.wrap_1{margin-bottom:-20px;}
+	#movie_select{  
+		margin: 0 15px;
+		padding: 0 15px;
+		--fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+		--fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";
+		--fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
+		color: #333;
+		line-height: 1.33;
+		font-size: 12px;
+		font-family: Helvetica,Arial,sans-serif;
+		-webkit-text-size-adjust: none;
+		cursor: pointer;
+		letter-spacing: 0;
+		position: relative;
+		overflow: hidden;
+		width: 90%;
+		display: block;
+		box-sizing: border-box;
+		border: 1.5px #ffdfdb solid;
+		height: 36px;
+		border-color: #ff422e;
+		border-radius: 6px;
+		background-color: #f8f8f8;
+	}
+
+</style>
+
+
+<div class="container">
+			
+<div></div>
+
+	<section id="main" class="fashion">
+	    
+			<div id="section_fashion_trend" class="fashion_trend trend">	
+				<h3>
+					영화 추천 프로그램		
+				</h3>
+				<div style="padding: 0px 0px 14px 14px;">
+					<p>
+						🎥 영화 추천 프로그램 입니다. <br>
+						<strong>AI분석</strong>을 통해 당신에게 영화를 추천해드립니다. <br>
+						<span style="color: rgb(235, 83, 60);">검색창에 내가 본 영화를 선택해주세요.</span> <br><br>
+
+						이 프로그램은 이런 추천이 가능해요 🥳<br>
+						1. 평점을 바탕으로 분석한 인기순 추천<br>
+						2. 컨텐츠의 줄거리, 장르, 감독, 캐스팅 기반 추천<br>
+						3. 다른 고객이 함께 본 영화 추천
+					</p>				
+					
+
+				</div>
+
+				
+					<form name="search" method="post" id="search"> 
+					{% csrf_token %}
+					<!--상품 검색용 추천박스-->
+					<div class="search_keyword"  >
+						<h3>검색하려는 영화를 선택하세요</h3>
+				
+						<select name="movie_select" id="movie_select">
+							<option value="Inception" selected>검색하려는 영화를 선택하세요</option>
+							
+						</select>
+
+						<!--상품 검색용 추천박스-->
+					   <div class='load_more_wrap' style="margin-top: 10px;">
+						   <button type="button" id="searchBtn" class="btn btn_rightArrow icon_right" onclick="location.href='#';">
+							   <strong>검색 🔍</strong>
+							</button>
+					   </div> 
+					</div>
+					
+
+
+					</form>
+
+
+			</div>
+
+		
+
+
+
+					
+<!--메인 랭킹--> 		
+<div class="mainRanking" style="margin-top: -20px;">
+	{% comment %} <div id="dv_rank_cate" class="centeredMenu image ">
+		<ul>				   
+		
+			<li id="li_rank_cate_0" class="selected">
+				<button type="button" data-cd="0">
+					<div class="imgWrap">
+						<br>
+						<div>인기순</div>
+					</div>
+				</button>
+			</li>		
+			<li id="li_rank_cate_100000001" class="">
+				<button type="button" data-cd="100000001">
+					<div class="imgWrap">
+						<br>
+						<div>맞춤 영화</div>
+					</div>
+				</button>
+			</li>	
+		
+			<li id="li_rank_cate_100000001" class="">
+				<button type="button" data-cd="100000001">
+					<div class="imgWrap">
+						<br>
+						<div>장르별</div>
+					</div>
+				</button>
+			</li>		
+			<li id="li_rank_cate_100000001" class="">
+				<button type="button" data-cd="100000001">
+					<div class="imgWrap">
+						<br>
+						<div>관련 영화</div>
+					</div>
+				</button>
+			</li>		
+
+		</ul>
+	</div> {% endcomment %}
+		
+</div>
+<!--순위 시작-->
+<div class="list2021_wrap">
+				
+	<ul class="list2021 rank list" id="ul_category_best">
+	
+			<li data_gd_no="988121331" style=" ">
+				<div class="top_wrap">
+
+					<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+						<div class="img_wrap">
+							<img id=''
+								class="thumb" 
+								
+								load="N"
+								src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg"
+								gd_src="#"
+									
+								alt="1위">
+							<!-- 품절 -->
+							
+							<!-- 메가와리 뱃지 -->
+							
+							
+							<!-- CPS -->
+							
+						</div>
+					</a>
+	
+					<div class="content_wrap">
+						<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+							<dl class="text_wrap">
+								<dt>
+									
+									<!-- 장르 -->
+										<p class="text_brand genres0">
+											코미디, 액션, 멜로
+										</p>
+										
+										
+									<!-- 영화제목 -->
+									<p style="font-size: 1.2em;" class="text_item title0">영화제목</p>
+								</dt>
+	
+								<dd>
+
+									<!-- 평점 --> 
+									<div class="text_price">
+										<p class="price_wrap">
+
+											
+												<span class="price_percent ratings0">
+													9.8
+												</span>
+											
+										</p>
+											
+										
+									</div>
+								</dd>
+							</dl>
+						</a>
+
+					</div>
+				</div>
+			</li>
+			<li data_gd_no="988121331" style=" ">
+				<div class="top_wrap">
+
+					<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+						<div class="img_wrap">
+							<img
+								class="thumb" 
+								
+								load="N"
+								src="data:image/jpeg;base64,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"
+								gd_src="#"
+									
+								alt="1위">
+							<!-- 품절 -->
+							
+							<!-- 메가와리 뱃지 -->
+							
+							
+							<!-- CPS -->
+							
+						</div>
+					</a>
+	
+					<div class="content_wrap">
+						<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+							<dl class="text_wrap">
+								<dt>
+									
+									<!-- 장르 -->
+										<p class="text_brand genres1">
+											코미디, 액션, 멜로
+										</p>
+										
+										
+									<!-- 영화제목 -->
+									<p style="font-size: 1.2em;" class="text_item title1">영화제목</p>
+								</dt>
+	
+								<dd>
+
+									<!-- 평점 --> 
+									<div class="text_price">
+										<p class="price_wrap">
+
+											
+												<span class="price_percent ratings1">
+													9.8
+												</span>
+											
+										</p>
+											
+										
+									</div>
+								</dd>
+							</dl>
+						</a>
+
+					</div>
+				</div>
+			</li>
+			<li data_gd_no="988121331" style=" ">
+				<div class="top_wrap">
+
+					<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+						<div class="img_wrap">
+							<img
+								class="thumb" 
+								
+								load="N"
+								src="https://w.namu.la/s/bd4e3a0a4da8e20ac7344df357a1d2a66e47e76d40566d88c64b1a73e6392a16afaae6d39cc7a244dd1b3b61f51c43b6bc6d0e47c1207dbfbdd7a0a026dc9ff96ec99ab58bdcdc1fc74be196fb4be6d24df2622103c6d4d9ac74056e842fd3884a4dc7fce7027f2b8aec487d5263861b"
+								gd_src="#"
+									
+								alt="1위">
+							<!-- 품절 -->
+							
+							<!-- 메가와리 뱃지 -->
+							
+							
+							<!-- CPS -->
+							
+						</div>
+					</a>
+	
+					<div class="content_wrap">
+						<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+							<dl class="text_wrap">
+								<dt>
+									
+									<!-- 장르 -->
+										<p class="text_brand genres2">
+											코미디, 액션, 멜로
+										</p>
+										
+										
+									<!-- 영화제목 -->
+									<p style="font-size: 1.2em;" class="text_item title2">영화제목</p>
+								</dt>
+	
+								<dd>
+
+									<!-- 평점 --> 
+									<div class="text_price">
+										<p class="price_wrap">
+
+											
+												<span class="price_percent ratings2">
+													9.8
+												</span>
+											
+										</p>
+											
+										
+									</div>
+								</dd>
+							</dl>
+						</a>
+
+					</div>
+				</div>
+			</li>
+			<li data_gd_no="988121331" style=" ">
+				<div class="top_wrap">
+
+					<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+						<div class="img_wrap">
+							<img
+								class="thumb" 
+								
+								load="N"
+								src="https://play-lh.googleusercontent.com/5cOZe3La3DCBSdZ_XR4CPJqMRaSMNO2uz3YE-BWE0qgyhwAOGUfpCGs4fbN-tmEBI54=w240-h480-rw"
+								gd_src="#"
+									
+								alt="1위">
+							<!-- 품절 -->
+							
+							<!-- 메가와리 뱃지 -->
+							
+							
+							<!-- CPS -->
+							
+						</div>
+					</a>
+	
+					<div class="content_wrap">
+						<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+							<dl class="text_wrap">
+								<dt>
+									
+									<!-- 장르 -->
+										<p class="text_brand genres3">
+											코미디, 액션, 멜로
+										</p>
+										
+										
+									<!-- 영화제목 -->
+									<p style="font-size: 1.2em;" class="text_item title3">영화제목</p>
+								</dt>
+	
+								<dd>
+
+									<!-- 평점 --> 
+									<div class="text_price">
+										<p class="price_wrap">
+
+											
+												<span class="price_percent ratings3">
+													9.8
+												</span>
+											
+										</p>
+											
+										
+									</div>
+								</dd>
+							</dl>
+						</a>
+
+					</div>
+				</div>
+			</li>
+			<li data_gd_no="988121331" style=" ">
+				<div class="top_wrap">
+
+					<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+						<div class="img_wrap">
+							<img
+								class="thumb" 
+								
+								load="N"
+								src="https://play-lh.googleusercontent.com/TGaTckK5V7VKlJ34PFlON5ei_DARWndAHrDqOWTaC6kH5R8V8RlxE6i22VswAx3ENx-3=w240-h480-rw"
+								gd_src="#"
+									
+								alt="1위">
+							<!-- 품절 -->
+							
+							<!-- 메가와리 뱃지 -->
+							
+							
+							<!-- CPS -->
+							
+						</div>
+					</a>
+	
+					<div class="content_wrap">
+						<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+							<dl class="text_wrap">
+								<dt>
+									
+									<!-- 장르 -->
+										<p class="text_brand genres4">
+											코미디, 액션, 멜로
+										</p>
+										
+										
+									<!-- 영화제목 -->
+									<p style="font-size: 1.2em;" class="text_item title4">영화제목</p>
+								</dt>
+	
+								<dd>
+
+									<!-- 평점 --> 
+									<div class="text_price">
+										<p class="price_wrap">
+
+											
+												<span class="price_percent ratings4">
+													9.8
+												</span>
+											
+										</p>
+											
+										
+									</div>
+								</dd>
+							</dl>
+						</a>
+
+					</div>
+				</div>
+			</li>
+			<li data_gd_no="988121331" style=" ">
+				<div class="top_wrap">
+
+					<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+						<div class="img_wrap">
+							<img
+								class="thumb" 
+								
+								load="N"
+								src="https://blog.kakaocdn.net/dn/kCVyB/btqSdsYiWKg/xgmqhii4Kkj1Bv3kup0jyK/img.jpg"
+								gd_src="#"
+									
+								alt="1위">
+							<!-- 품절 -->
+							
+							<!-- 메가와리 뱃지 -->
+							
+							
+							<!-- CPS -->
+							
+						</div>
+					</a>
+	
+					<div class="content_wrap">
+						<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+							<dl class="text_wrap">
+								<dt>
+									
+									<!-- 장르 -->
+										<p class="text_brand genres5">
+											코미디, 액션, 멜로
+										</p>
+										
+										
+									<!-- 영화제목 -->
+									<p style="font-size: 1.2em;" class="text_item title5">영화제목</p>
+								</dt>
+	
+								<dd>
+
+									<!-- 평점 --> 
+									<div class="text_price">
+										<p class="price_wrap">
+
+											
+												<span class="price_percent ratings5">
+													9.8
+												</span>
+											
+										</p>
+											
+										
+									</div>
+								</dd>
+							</dl>
+						</a>
+
+					</div>
+				</div>
+			</li>
+			<li data_gd_no="988121331" style=" ">
+				<div class="top_wrap">
+
+					<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+						<div class="img_wrap">
+							<img
+								class="thumb" 
+								
+								load="N"
+								src="https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"
+								gd_src="#"
+									
+								alt="1위">
+							<!-- 품절 -->
+							
+							<!-- 메가와리 뱃지 -->
+							
+							
+							<!-- CPS -->
+							
+						</div>
+					</a>
+	
+					<div class="content_wrap">
+						<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+							<dl class="text_wrap">
+								<dt>
+									
+									<!-- 장르 -->
+										<p class="text_brand genres6">
+											코미디, 액션, 멜로
+										</p>
+										
+										
+										<p style="font-size: 1.2em;" class="text_item title6">영화제목</p>
+
+								</dt>
+	
+								<dd>
+
+									<!-- 평점 --> 
+									<div class="text_price">
+										<p class="price_wrap">
+
+											
+												<span class="price_percent ratings6">
+													9.8
+												</span>
+											
+										</p>
+											
+										
+									</div>
+								</dd>
+							</dl>
+						</a>
+
+					</div>
+				</div>
+			</li>
+			<li data_gd_no="988121331" style=" ">
+				<div class="top_wrap">
+
+					<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+						<div class="img_wrap">
+							<img
+								class="thumb" 
+								
+								load="N"
+								src="https://upload.wikimedia.org/wikipedia/en/thumb/6/67/Forrest_Gump_poster.jpg/220px-Forrest_Gump_poster.jpg"
+								gd_src="#"
+									
+								alt="1위">
+							<!-- 품절 -->
+							
+							<!-- 메가와리 뱃지 -->
+							
+							
+							<!-- CPS -->
+							
+						</div>
+					</a>
+	
+					<div class="content_wrap">
+						<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+							<dl class="text_wrap">
+								<dt>
+									
+									<!-- 장르 -->
+										<p class="text_brand genres7">
+											코미디, 액션, 멜로
+										</p>
+										
+										
+										<p style="font-size: 1.2em;" class="text_item title7">영화제목</p>
+
+								</dt>
+	
+								<dd>
+
+									<!-- 평점 --> 
+									<div class="text_price">
+										<p class="price_wrap">
+
+											
+												<span class="price_percent ratings7">
+													9.8
+												</span>
+											
+										</p>
+											
+										
+									</div>
+								</dd>
+							</dl>
+						</a>
+
+					</div>
+				</div>
+			</li>
+			<li data_gd_no="988121331" style=" ">
+				<div class="top_wrap">
+
+					<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+						<div class="img_wrap">
+							<img
+								class="thumb" 
+								
+								load="N"
+								src="https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUtNWUzMi00MTgxLWI0NTctMzY4M2VlOTdjZWRiXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_.jpg"
+								gd_src="#"
+									
+								alt="1위">
+							<!-- 품절 -->
+							
+							<!-- 메가와리 뱃지 -->
+							
+							
+							<!-- CPS -->
+							
+						</div>
+					</a>
+	
+					<div class="content_wrap">
+						<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+							<dl class="text_wrap">
+								<dt>
+									
+									<!-- 장르 -->
+										<p class="text_brand genres8">
+											코미디, 액션, 멜로
+										</p>
+										
+										<p style="font-size: 1.2em;" class="text_item title8">영화제목</p>
+
+								</dt>
+	
+								<dd>
+
+									<!-- 평점 --> 
+									<div class="text_price">
+										<p class="price_wrap">
+
+											
+												<span class="price_percent ratings8">
+													9.8
+												</span>
+											
+										</p>
+											
+										
+									</div>
+								</dd>
+							</dl>
+						</a>
+
+					</div>
+				</div>
+			</li>
+			<li data_gd_no="988121331" style=" ">
+				<div class="top_wrap">
+
+					<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+						<div class="img_wrap">
+							<img
+								class="thumb" 
+								
+								load="N"
+								src="https://m.media-amazon.com/images/M/MV5BYmU1NDRjNDgtMzhiMi00NjZmLTg5NGItZDNiZjU5NTU4OTE0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"
+								gd_src="#"
+									
+								alt="1위">
+							<!-- 품절 -->
+							
+							<!-- 메가와리 뱃지 -->
+							
+							
+							<!-- CPS -->
+							
+						</div>
+					</a>
+	
+					<div class="content_wrap">
+						<a href="#" onclick="UITrackingHelper.TrackingGoodsCall(this, {'EventTracking':{'TrackingType':'DEFAULT','TrackingValue':''},'OrderTracking':{'TrackingType':'GA360','TrackingValue':'bestseller#988121331#1999#0##N######JP##'}}, null, [])" >
+							<dl class="text_wrap">
+								<dt>
+									
+									<!-- 장르 -->
+										<p class="text_brand genres9">
+											코미디, 액션, 멜로
+										</p>
+										
+										
+										<p style="font-size: 1.2em;" class="text_item title9">영화제목</p>
+
+								</dt>
+	
+								<dd>
+
+									<!-- 평점 --> 
+									<div class="text_price">
+										<p class="price_wrap">
+
+											
+												<span class="price_percent ratings9">
+													9.8
+												</span>
+											
+										</p>
+											
+										
+									</div>
+								</dd>
+							</dl>
+						</a>
+
+					</div>
+				</div>
+			</li>
+	
+	
+	</ul>
+	
+	</div>
+<!--메인 랭킹 끝--> 
+	
+
+{% endblock content-block %}
+
