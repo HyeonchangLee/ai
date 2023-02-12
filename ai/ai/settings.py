@@ -41,9 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'app1',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',     # 추가corsheaders
+    'django.middleware.common.CommonMiddleware', # 추가corsheaders
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,6 +57,19 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# 추가corsheaders
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000/'
+)
+#script안에서의 리소스 요청을 허용할 도메인 추가
+
+#REST_FRAMEWORK 추가
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
 
 ROOT_URLCONF = 'ai.urls'
 
